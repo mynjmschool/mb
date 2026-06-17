@@ -13,6 +13,8 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;  
     }
     
     body {
@@ -640,8 +642,8 @@
     /* Admin Ke Liye School Details Edit (Pencil) Button - Profile Avatar Ke Right-Bottom Corner Par */
     .sidebar-profile .school-edit-btn {
       position: absolute;
-      bottom: -3px;
-      right: -3px;
+      bottom: -1px;
+      right: -1px;
       background: white;
       border-radius: 50%;
       padding: 5px;
@@ -3279,7 +3281,7 @@
 
   <!-- SIDEBAR BOTTOM BUTTONS -->
   <div style="margin-top: auto; display: flex; flex-direction: column; gap: 0;">
-    <p style="text-align: center; font-size: 0.72rem; color: #adb5bd; margin: 0 0 8px 0;">App Version - 11.7</p>
+    <p style="text-align: center; font-size: 0.72rem; color: #adb5bd; margin: 0 0 8px 0;">App Version - 11.9</p>
     <div style="display: flex; gap: 10px;">
       <button class="btn-custom" style="flex: 1; background: #ffc107; color: #333;" onclick="openSwitchAccountModal()">
         <i class="bi bi-people-fill"></i> Switch
@@ -3379,7 +3381,7 @@
         <div>
           <div onclick="openNoticePopup()" style="cursor: pointer;">
           <h1>SCHOOL MANAGEMENT</h1>
-          <p style="margin-bottom: 0; font-weight: 500;">NEW JEEVAN MISSION SCHOOL</p>  <!-- NEEDS EDIT -->
+          <p style="margin-bottom: 0; font-weight: 500;">NEW JEEVAN MISSION SCHOOL</p> <!-- NEEDS EDIT -->
           </div>
         </div>
       </div>
@@ -3448,14 +3450,14 @@
           <button class="tab-btn active" id="noticeTabBtn" onclick="switchNoticeTab('notices')" style="flex:1;">
             <i class="bi bi-megaphone-fill"></i> Notice
           </button>
-          <button id="addNoticePlusBtn" class="notice-add-btn" title="Naya Notice Add Karo"
+          <button id="addNoticePlusBtn" class="notice-add-btn" title="Add New Notice"
             onclick="openNoticeForm('notice')" style="display:none;">
             <i class="bi bi-plus-circle-fill"></i>
           </button>
           <button class="tab-btn" id="complaintTabBtn" onclick="switchNoticeTab('complaints')" style="flex:1;">
             <i class="bi bi-exclamation-circle-fill"></i> Complaints
           </button>
-          <button id="addComplaintPlusBtn" class="notice-add-btn" title="Naya Complaint Add Karo"
+          <button id="addComplaintPlusBtn" class="notice-add-btn" title="Add New Complaint"
             onclick="openNoticeForm('complaint')" style="display:none;">
             <i class="bi bi-plus-circle-fill"></i>
           </button>
@@ -3602,7 +3604,7 @@
                 </div>
               </div>
             </div>
-          </a>          
+          </a>
           <a href="https://script.google.com/macros/s/AKfycbwccKf2sfZqOUW-82wABmH0gzO3QtBvb5JiW0yUcJJHT3VkMZXIcahg4GtrO3Nzzr-i/exec" target="_blank" style="text-decoration: none;"> <!-- NEEDS EDIT -->
             <div class="cached-account-item">
               <div class="cached-account-info">
@@ -4540,9 +4542,9 @@
               <input type="number" id="hwTotalChapters" class="text-input" placeholder="Total Chapters (Col E)" style="flex:1; padding:8px;" min="1">
               <input type="number" id="hwSyllabusThreshold" class="text-input" placeholder="Threshold %" style="flex:1; padding:8px;" min="1" max="100">
             </div>
-            <div id="hwSyllabusTypesSection" style="display:none;">
-              <div id="hwSyllabusTypeInputs" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;"></div>
-            </div>
+          <div id="hwSyllabusTypesSection" style="display:none;">
+            <div id="hwSyllabusTypeInputs" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;"></div>
+          </div>
             <div style="display:flex; gap:8px; margin-bottom:10px;">
               <button class="btn btn-secondary" style="flex:1; padding:8px; font-size:0.85rem;" onclick="loadHwSyllabusTypes()"><i class="bi bi-list-check"></i> Load Types</button>
               <button class="btn" style="flex:1; padding:8px; font-size:0.85rem; background:#667eea; color:white; border:none; border-radius:8px;" onclick="saveHwSyllabus()"><i class="bi bi-save-fill"></i> Save Syllabus</button>
@@ -4862,12 +4864,35 @@
           </div>
           <div id="invPendingList" style="display:flex; overflow-x:auto; gap:10px; padding-bottom:5px; margin-top:5px; scrollbar-width:thin;"></div>
         </div>
+        <!-- Refund Button -->
+        <div id="refundItemsBtnContainer" style="display:none; margin-bottom:10px;">
+          <button onclick="toggleRefundMode()" 
+            style="background:#fff0f0; border:1.5px solid #dc3545; border-radius:15px; color:#dc3545; cursor:pointer; font-size:0.8rem; padding:4px 14px; font-weight:bold; width:100%;">
+            <i class="bi bi-arrow-return-left"></i> Refund Items
+          </button>
+        </div>
+
+        <!-- Refund Items Section (Initially Hidden) -->
+        <div id="refundItemsContainer" style="display:none; background:#ffe5e5; padding:10px; border-radius:8px; border:1px solid #f5c6cb; margin-bottom:15px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+            <label style="font-weight:bold; color:#842029; font-size:0.85rem; margin:0;">
+              <i class="bi bi-arrow-return-left"></i> Refund Items:
+            </label>
+            <button onclick="markAllRefundItems()" 
+              style="background:#842029; border:none; border-radius:15px; color:white; cursor:pointer; font-size:0.75rem; padding:3px 12px; font-weight:bold;">
+              <i class="bi bi-check-all"></i> Mark All
+            </button>
+          </div>
+          <div id="invRefundList" style="display:flex; overflow-x:auto; gap:10px; padding-bottom:5px; margin-top:5px; scrollbar-width:thin;"></div>
+        </div>
+
         <div class="form-group">
           <label>Payment Mode</label>
           <select id="collectFeeMode" class="text-input">
             <option value="Cash" selected>Cash</option>
             <option value="UPI">UPI</option>
             <option value="Bank Transaction">Bank Transaction</option>
+            <option value="Refund">Refund</option>
           </select>
         </div>
         <div class="form-group">
@@ -4888,7 +4913,11 @@
         </div>
         <div class="form-group">
           <label>Date (Optional)</label>
-          <input type="date" id="collectFeeDate" class="text-input">
+          <input type="date" id="collectFeeDate" class="text-input" onchange="onFeeDateChanged(this.value)">
+        </div>
+        <div class="form-group">
+          <label style="color:#888; font-size:0.85rem;">Receipt Note</label>
+          <textarea id="collectFeeNote" class="text-input" rows="2" placeholder="Tempprary Note To Print On Receipt Only" style="resize:vertical; font-size:0.9rem;"></textarea>
         </div>
         <button class="btn btn-primary" style="width:100%" onclick="saveCollectFee()">Collect Fee</button>
      </div>
@@ -4943,7 +4972,11 @@
             </div>
             <div class="form-group">
               <label>Date (Optional)</label>
-              <input type="date" id="addFeeDate" class="text-input">
+              <input type="date" id="addFeeDate" class="text-input" onchange="onFeeDateChanged(this.value)">
+            </div>
+            <div class="form-group">
+              <label style="color:#888; font-size:0.85rem;">Receipt Note</label>
+              <textarea id="addFeeNote" class="text-input" rows="2" placeholder="Optional note to print on receipt..." style="resize:vertical; font-size:0.9rem;"></textarea>
             </div>
             <button class="btn btn-success" style="width:100%" onclick="saveAddFee()">Save Fee</button>
           </div>
@@ -5118,48 +5151,6 @@
         }
       }
     };
-    // ==================== NETLIFY API CONNECTION ====================
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKnpr1XfFIB1DTZduVfGMowSCevloWJfbTTWUteMrAsRPFU3lHLQol-A_aZ7TIXdLF/exec"; 
-    // Ye code google.script.run ko mimic karega taki aapko apna purana code change na karna pade
-    const google = {
-      script: {
-        get run() {
-          let successHandler = null;
-          let failureHandler = null;
-          return new Proxy({}, {
-            get: function(target, prop) {
-              if (prop === 'withSuccessHandler') {
-                return function(cb) { successHandler = cb; return this; };
-              }
-              if (prop === 'withFailureHandler') {
-                return function(cb) { failureHandler = cb; return this; };
-              }
-              // Jab koi actual backend function call ho
-              return function(...args) {
-                fetch(SCRIPT_URL, {
-                  method: 'POST',
-                  body: JSON.stringify({ action: prop, args: args }),
-                  headers: { 'Content-Type': 'text/plain;charset=utf-8' } // CORS error se bachne ke liye text/plain
-                })
-                .then(res => res.json())
-                .then(data => {
-                  if (data.error) {
-                    if (failureHandler) failureHandler(data.error);
-                    else console.error("Backend Error:", data.error);
-                  } else {
-                    if (successHandler) successHandler(data.result);
-                  }
-                })
-                .catch(err => {
-                  if (failureHandler) failureHandler(err.toString());
-                  else console.error("Fetch Error:", err);
-                });
-              };
-            }
-          });
-        }
-      }
-    };
 
     function getTodayDate() {
       const d = new Date();
@@ -5239,7 +5230,50 @@
         toggleSidebar();
       }
     }
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKnpr1XfFIB1DTZduVfGMowSCevloWJfbTTWUteMrAsRPFU3lHLQol-A_aZ7TIXdLF/exec"; 
 
+      // Ye code google.script.run ko mimic karega taki aapko apna purana code change na karna pade
+      const google = {
+        script: {
+          get run() {
+            let successHandler = null;
+            let failureHandler = null;
+            
+            return new Proxy({}, {
+              get: function(target, prop) {
+                if (prop === 'withSuccessHandler') {
+                  return function(cb) { successHandler = cb; return this; };
+                }
+                if (prop === 'withFailureHandler') {
+                  return function(cb) { failureHandler = cb; return this; };
+                }
+                
+                // Jab koi actual backend function call ho
+                return function(...args) {
+                  fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: prop, args: args }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' } // CORS error se bachne ke liye text/plain
+                  })
+                  .then(res => res.json())
+                  .then(data => {
+                    if (data.error) {
+                      if (failureHandler) failureHandler(data.error);
+                      else console.error("Backend Error:", data.error);
+                    } else {
+                      if (successHandler) successHandler(data.result);
+                    }
+                  })
+                  .catch(err => {
+                    if (failureHandler) failureHandler(err.toString());
+                    else console.error("Fetch Error:", err);
+                  });
+                };
+              }
+            });
+          }
+        }
+      };
     // ==================== APP SHORTCUTS ==================== NEEDS EDIT ==========
     function renderMoreApps() {
       const container = document.getElementById('moreAppsContainer');
@@ -5804,7 +5838,7 @@
         .withSuccessHandler(function(res) {
           const data = JSON.parse(res);
           if (!data.success) {
-            showMessage(data.message || 'Error loading chart data', 'error');
+            showMessage(data.message || 'Error Loading Chart Data', 'error');
             // Overlay wapas button ke saath restore karo
             overlay.innerHTML = '<button onclick="loadInvStockChart()"><i class="bi bi-bar-chart-line-fill"></i> Retry</button>';
             return;
@@ -8008,14 +8042,27 @@
       showSpinner(true);
       google.script.run
         .withSuccessHandler(res => {
-          showSpinner(false);
           const data = JSON.parse(res);
           if(data.success) {
-            playSound('success');
-            showMessage('Student Data Updated Successfully!', 'success');
             document.getElementById('editStudentModal').style.display = 'none';
-            fetchRecentStudents(); // Reload the table
+            showMessage('Student Updated! Auto Syncing...', 'info');
+            // Edit ke baad single student auto sync
+            google.script.run
+              .withSuccessHandler(function(syncRes) {
+                showSpinner(false);
+                playSound('success');
+                showMessage('Student Updated & Synced Successfully!', 'success');
+                fetchRecentStudents();
+              })
+              .withFailureHandler(function(syncErr) {
+                showSpinner(false);
+                playSound('success');
+                showMessage('Updated! But Sync Failed: ' + syncErr, 'error');
+                fetchRecentStudents();
+              })
+              .syncStudentToAllSheets(updatedData.uid);
           } else {
+            showSpinner(false);
             playSound('error');
             showMessage('Update Failed: ' + data.message, 'error');
           }
@@ -8029,7 +8076,7 @@
     }
     
     function confirmDeleteStudent(uid, source) {
-      if (!confirm('\u26A0\uFE0F Are You Sure To DELETE UID ' + uid + '?\n\nData Will Be Deleted.\nThis Action Can Not Undo!')) return;
+      if (!confirm('\u26A0\uFE0F Are You Sure To DELETE UID ' + uid + '?\n\nStudent Data Will Be Deleted.\nThis Action Can Not Undo!')) return;
       showSpinner(true);
       google.script.run
         .withSuccessHandler(function (res) {
@@ -8377,11 +8424,31 @@
     function restoreStudent(uid) {
       if(!confirm("Restore This Student Back To Students Sheet?")) return;
       showSpinner(true);
-      google.script.run.withSuccessHandler(res => {
-         showSpinner(false);
-         showMessage("Student Restored Successfully!", "success");
-         fetchRecentStudents();
-      }).restoreStudentBackend(uid); // Make sure to add this function in Configuration.txt
+      google.script.run
+        .withSuccessHandler(res => {
+          showMessage('Student Restored! Auto Syncing...', 'info');
+          // Restore ke baad single student auto sync
+          google.script.run
+            .withSuccessHandler(function(syncRes) {
+              showSpinner(false);
+              playSound('success');
+              showMessage('Student Restored & Synced Successfully!', 'success');
+              fetchRecentStudents();
+            })
+            .withFailureHandler(function(syncErr) {
+              showSpinner(false);
+              playSound('success');
+              showMessage('Restored! But Sync Failed: ' + syncErr, 'error');
+              fetchRecentStudents();
+            })
+            .syncStudentToAllSheets(uid);
+        })
+        .withFailureHandler(err => {
+          showSpinner(false);
+          playSound('error');
+          showMessage('Restore Failed: ' + err, 'error');
+        })
+        .restoreStudentBackend(uid);
     }
 
     function permanentlyDeleteStudent(uid, sheetName) {
@@ -9806,7 +9873,10 @@
               <td><strong>${s.name}</strong> <span style="font-size: 0.9em; color: #666;">(${s.class})</span></td>
               <td>${s.fatherName}</td>
               <td style="font-weight:600;">${s.feeDate}</td>
-              <td style="color:#28a745; font-weight:bold; font-size:1.1rem;">₹${s.fee}</td>
+              <td style="color:#28a745; font-weight:bold; font-size:1.1rem;">
+                ₹${s.fee}
+                <br><small style="color:#888; font-weight:normal; font-size:0.75rem;">${s.feeType || 'School Fee'}</small>
+              </td>
             </tr>`;
           });
       }
@@ -9917,7 +9987,6 @@
                 <div class="action-icons" style="margin-top: 8px; display: flex; gap: 12px;">
                   <span title="Call Parent" style="cursor:pointer; color: inherit; font-size: 1.4rem;" onclick="callParentWithNote('${s.uid}', '${s.name}', '${s.phone}')"><i class="bi bi-telephone"></i></span>
                   <a href="javascript:void(0)" onclick="sendWhatsAppMessage('${s.uid}', '${s.name}', '${s.fatherName}', '${s.phone}')" title="Send WhatsApp Message" style="text-decoration:none; color: inherit; font-size: 1.4rem;"><i class="bi bi-whatsapp"></i></a>
-                    <span title="Set Fee Date" style="cursor:pointer; font-size:1.4rem;" onclick="openFeeDatePicker('${s.uid}')"><i class="bi bi-calendar-event"></i></span>
                     <span title="Add/View Note" style="cursor:pointer; font-size:1.4rem; color:inherit;" onclick="openFeeNoteDialog('${s.uid}', '${s.name}')"><i class="bi bi-journal-text"></i></span>
                 </div>
                 </div>
@@ -10167,26 +10236,69 @@
       document.getElementById('testIndividualResult').innerHTML = html;
     }
 
+    // Session year calculate karo (April ke baad badlata hai)
+    function getCurrentSession() {
+      const now = new Date();
+      const yr = now.getFullYear();
+      const mo = now.getMonth(); // 0=Jan, 3=Apr
+      const startYr = mo >= 3 ? yr : yr - 1; // April se session start
+      return String(startYr).slice(2) + String(startYr + 1).slice(2); // e.g. "2526"
+    }
+
+    let currentTestSession = '';
+    let currentTestReportClass = null;
+
     function showTestClasswiseInput() {
+      if (!currentTestSession) currentTestSession = getCurrentSession();
+
+      const testTypes = ['APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC','JAN','FEB','MAR'];
+      const sessionOptions = _getSessionOptions(currentTestSession);
+
       loadClassesWithCache(classes => {
-          if (!classes.includes('All')) classes.unshift('All');
-          
-          let html = `
-            <h3 style="color: #17a2b8; margin-bottom: 15px;"><i class="bi bi-collection-fill"></i> Test Classwise Report</h3>
-            <div class="class-grid">
-          `;
-          
-          classes.forEach(cls => {
-            html += `<button class="class-btn" onclick="generateTestClasswiseReport('${cls}')">${cls}</button>`;
-          });
-          
-          html += `
-            </div>
-            <div id="testClasswiseResult"></div>
-          `;
-          
-          document.getElementById('testReportSection').innerHTML = html;
+        if (!classes.includes('All')) classes.unshift('All');
+        let classGrid = '';
+        classes.forEach(cls => {
+          classGrid += `<button class="class-btn" onclick="onTestClassSelect('${cls}')">${cls}</button>`;
+        });
+
+        const testMonth = currentTestSession && testTypes.includes(currentTestSession) ? currentTestSession : '';
+        const typeOptions = testTypes.map(t =>
+          `<option value="${t}" ${t === testMonth ? 'selected' : ''}>${t}</option>`
+        ).join('');
+
+        document.getElementById('testReportSection').innerHTML = `
+          <h3 style="color:#17a2b8; margin-bottom:10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <span style="display:flex; align-items:center; gap:6px; background:#e3f8fb; border:1px solid #17a2b8; border-radius:5px; padding:5px 10px; font-size:0.8rem; cursor:pointer;" onclick="document.getElementById('testTypeDropdown').focus()">
+              <i class="bi bi-calendar-event"></i>
+              <span style="color:#17a2b8; font-weight:700;">${getCurrentSession()}</span>
+              <input id="testTypeDropdown" list="testTypeList"
+                style="border:none; background:transparent; color:#17a2b8; font-weight:700; font-size:0.8rem; cursor:pointer; outline:none; width:52px;"
+                value="${testMonth}"
+                oninput="onTestTypeChange(this.value)"
+                onchange="onTestTypeChange(this.value)">
+              <datalist id="testTypeList">${typeOptions}</datalist>
+            </span>
+            <button style="padding:5px 12px; font-size:0.9rem; display:flex; align-items:center; gap:5px; background:#17a2b8; color:white; border:none; border-radius:5px; cursor:pointer;" onclick="triggerPublishSetup('Test')">
+              <i class="bi bi-upload"></i> Publish
+            </button>
+          </h3>
+          <p style="color:#666; margin-bottom:10px;">Select A Class To View Test Report</p>
+          <div class="class-grid" id="testClassGrid">${classGrid}</div>
+          <div id="testClasswiseResult"></div>
+        `;
       });
+    }
+
+    function onTestTypeChange(val) {
+      currentTestSession = val;
+      if (currentTestReportClass) generateTestClasswiseReport(currentTestReportClass);
+    }
+    function onTestSessionChange(val) {
+      currentTestSession = val;
+    }
+    function onTestClassSelect(cls) {
+      currentTestReportClass = cls;
+      generateTestClasswiseReport(cls);
     }
 
     function generateTestClasswiseReport(className) {
@@ -10210,7 +10322,7 @@
     function displayTestClasswiseResult(data) {
       let html = `
         <div style="margin-top: 20px;">
-          <h4 style="color: #17a2b8;">Class ${data.class} - Test Report (${data.students.length} Students)</h4>
+          <h4 style="color: #17a2b8;">Class ${data.class} - Test Report (${data.students.length})</h4>
           <div class="table-responsive">
             <table class="report-table">
               <thead>
@@ -10500,26 +10612,60 @@
       document.getElementById('examIndividualResult').innerHTML = html;
     }
 
+    let currentExamSession = '';
+    let currentExamType = '';
+    let currentExamReportClass = null;
+
     function showExamClasswiseInput() {
+      if (!currentExamSession) currentExamSession = getCurrentSession();
+
+      const examTypes = ['FA-I','FA-II','SA-I','FA-III','FA-IV','SA-II'];
+      const sessionOptions = _getSessionOptions(currentExamSession);
+
       loadClassesWithCache(classes => {
-          if (!classes.includes('All')) classes.unshift('All');
-          
-          let html = `
-            <h3 style="color: #6f42c1; margin-bottom: 15px;"><i class="bi bi-collection-fill"></i> Exam Classwise Report</h3>
-            <div class="class-grid">
-          `;
-          
-          classes.forEach(cls => {
-            html += `<button class="class-btn" onclick="generateExamClasswiseReport('${cls}')">${cls}</button>`;
-          });
-          
-          html += `
-            </div>
-            <div id="examClasswiseResult"></div>
-          `;
-          
-          document.getElementById('examReportSection').innerHTML = html;
+        if (!classes.includes('All')) classes.unshift('All');
+        let classGrid = '';
+        classes.forEach(cls => {
+          classGrid += `<button class="class-btn" onclick="onExamClassSelect('${cls}')">${cls}</button>`;
+        });
+
+        const typeOptions = examTypes.map(t =>
+          `<option value="${t}" ${t === currentExamType ? 'selected' : ''}>${t}</option>`
+        ).join('');
+
+        document.getElementById('examReportSection').innerHTML = `
+          <h3 style="color:#6f42c1; margin-bottom:10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <span style="display:flex; align-items:center; gap:6px; background:#f3eeff; border:1px solid #6f42c1; border-radius:5px; padding:5px 10px; font-size:0.8rem; cursor:pointer;" onclick="document.getElementById('examTypeDropdown').focus()">
+              <i class="bi bi-journal-bookmark"></i>
+              <span style="color:#6f42c1; font-weight:700;">${getCurrentSession()}</span>
+              <input id="examTypeDropdown" list="examTypeList"
+                style="border:none; background:transparent; color:#6f42c1; font-weight:700; font-size:0.8rem; cursor:pointer; outline:none; width:52px;"
+                value="${currentExamType}"
+                oninput="onExamTypeChange(this.value)"
+                onchange="onExamTypeChange(this.value)">
+              <datalist id="examTypeList">${typeOptions}</datalist>
+            </span>
+            <button style="padding:5px 12px; font-size:0.9rem; display:flex; align-items:center; gap:5px; background:#6f42c1; color:white; border:none; border-radius:5px; cursor:pointer;" onclick="triggerPublishSetup('Exam')">
+              <i class="bi bi-upload"></i> Publish
+            </button>
+          </h3>
+          <p style="color:#666; margin-bottom:10px;">Select A Class To View Exam Report</p>
+          <div class="class-grid" id="examClassGrid">${classGrid}</div>
+          <div id="examClasswiseResult"></div>
+        `;
       });
+    }
+
+    function onExamTypeChange(val) {
+      currentExamType = val;
+      if (currentExamReportClass) generateExamClasswiseReport(currentExamReportClass);
+    }
+    function onExamSessionChange(val) {
+      currentExamSession = val;
+    }
+    function onExamClassSelect(cls) {
+      currentExamReportClass = cls;
+      generateExamClasswiseReport(cls);
     }
 
     function generateExamClasswiseReport(className) {
@@ -10543,7 +10689,7 @@
     function displayExamClasswiseResult(data) {
       let html = `
         <div style="margin-top: 20px;">
-          <h4 style="color: #6f42c1;">Class ${data.class} - Exam Report (${data.students.length} Students)</h4>
+          <h4 style="color: #6f42c1;">Class ${data.class} - Exam Report (${data.students.length})</h4>
           <div class="table-responsive">
             <table class="report-table">
               <thead>
@@ -10780,7 +10926,138 @@
       html += `</tbody></table></div></div>`;
       document.getElementById('examMarkswiseResult').innerHTML = html;
     }
+// Session dropdown options generate karo (current +/- 2 sessions)
+    function _getSessionOptions(currentSess) {
+      const base = parseInt(currentSess) || parseInt(getCurrentSession());
+      let opts = '';
+      for (let d = -2; d <= 2; d++) {
+        const s = String(base + d * 101); // e.g. 2526 -> 2627
+        opts += `<option value="${s}">${s}</option>`;
+      }
+      return opts;
+    }
 
+    // ==================== PUBLISH SETUP POPUP ====================
+    function triggerPublishSetup(dataType) {
+      const color      = dataType === 'Test' ? '#17a2b8' : '#6f42c1';
+      const sheetLabel = dataType === 'Test'
+        ? (document.getElementById('testTypeDropdown')?.value || currentTestSession)
+        : (document.getElementById('examTypeDropdown')?.value || currentExamType);
+      const session = getCurrentSession();
+      const sheetName  = session + sheetLabel; // e.g. "2526JUN" or "2526FA-I"
+
+      let modal = document.getElementById('publishSetupModal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'publishSetupModal';
+        modal.className = 'overlay-container';
+        modal.style.zIndex = '6000';
+        document.body.appendChild(modal);
+      }
+
+      loadClassesWithCache(function(allClasses) {
+        const filtered = allClasses.filter(c => c !== 'All');
+        let checkboxRows = '';
+        for (let i = 0; i < filtered.length; i += 2) {
+          const cls1 = filtered[i];
+          const cls2 = filtered[i + 1];
+          checkboxRows += `<div style="display:flex; gap:10px; margin-bottom:8px;">`;
+          checkboxRows += `
+            <label style="flex:1; display:flex; align-items:center; gap:8px; background:#f0f4ff; border:2px solid ${color}; border-radius:8px; padding:8px 12px; cursor:pointer; font-weight:600; font-size:1rem;">
+              <input type="checkbox" value="${cls1}" checked style="width:18px; height:18px; accent-color:${color}; cursor:pointer;">
+              ${cls1}
+            </label>`;
+          if (cls2 !== undefined) {
+            checkboxRows += `
+            <label style="flex:1; display:flex; align-items:center; gap:8px; background:#f0f4ff; border:2px solid ${color}; border-radius:8px; padding:8px 12px; cursor:pointer; font-weight:600; font-size:1rem;">
+              <input type="checkbox" value="${cls2}" checked style="width:18px; height:18px; accent-color:${color}; cursor:pointer;">
+              ${cls2}
+            </label>`;
+          } else {
+            checkboxRows += `<div style="flex:1;"></div>`;
+          }
+          checkboxRows += `</div>`;
+        }
+
+        modal.innerHTML = `
+          <div class="custom-card" style="width:95%; max-width:480px; padding:25px; max-height:85vh; overflow-y:auto;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid ${color}; padding-bottom:10px; margin-bottom:18px;">
+              <h5 style="margin:0; color:${color}; font-size:1.2rem;">
+                <i class="bi bi-upload"></i> Publish Setup - ${sheetName}
+              </h5>
+              <button onclick="document.getElementById('publishSetupModal').style.display='none'" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:#666;">&times;</button>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <strong style="font-size:0.95rem; color:#333;">Select Classes:</strong>
+              <div style="display:flex; gap:8px;">
+                <button onclick="document.querySelectorAll('#publishSetupModal input[type=checkbox]').forEach(c=>c.checked=true)" style="font-size:0.8rem; padding:3px 10px; border:1px solid ${color}; background:#f0f4ff; color:${color}; border-radius:5px; cursor:pointer;">All</button>
+                <button onclick="document.querySelectorAll('#publishSetupModal input[type=checkbox]').forEach(c=>c.checked=false)" style="font-size:0.8rem; padding:3px 10px; border:1px solid #dc3545; background:#fdecea; color:#dc3545; border-radius:5px; cursor:pointer;">None</button>
+              </div>
+            </div>
+
+            <div style="max-height:40vh; overflow-y:auto; padding-right:4px;">
+              ${checkboxRows}
+            </div>
+
+            <div style="margin-top:18px; display:flex; gap:10px; align-items:center;">
+              <button onclick="confirmClearCurrentSheet('${dataType}')" title="Clear All Marks (Column G ke baad)" style="padding:10px 14px; border:2px solid #dc3545; background:#fff; border-radius:8px; font-size:1rem; cursor:pointer; color:#dc3545;" title="CURRENT Sheet ke marks clear karo">
+                <i class="bi bi-x-circle"></i>
+              </button>
+              <button onclick="document.getElementById('publishSetupModal').style.display='none'" style="flex:1; padding:10px; border:2px solid #ccc; background:#fff; border-radius:8px; font-size:1rem; cursor:pointer; color:#555;">Cancel</button>
+              <button onclick="confirmPublish('${dataType}', '${sheetName}')" style="flex:2; padding:10px; background:linear-gradient(135deg,${color},${color}cc); border:none; border-radius:8px; font-size:1rem; font-weight:700; color:#fff; cursor:pointer;">
+                <i class="bi bi-upload"></i> Publish
+              </button>
+            </div>
+          </div>
+        `;
+        modal.style.display = 'flex';
+      });
+    }
+
+    function confirmPublish(dataType, sheetName) {
+      const checkboxes = document.querySelectorAll('#publishSetupModal input[type=checkbox]:checked');
+      const selectedClasses = Array.from(checkboxes).map(c => c.value);
+      if (selectedClasses.length === 0) {
+        showMessage('No Any Class Selected!', 'error');
+        return;
+      }
+      document.getElementById('publishSetupModal').style.display = 'none';
+      showSpinner(true);
+      showMessage('Publishing Data...', 'info');
+      google.script.run
+        .withSuccessHandler(res => {
+          showSpinner(false);
+          const r = JSON.parse(res);
+          if (r.success) {
+            showMessage(r.message, 'success');
+          } else {
+            showMessage('Error: ' + r.message, 'error');
+          }
+        })
+        .withFailureHandler(err => {
+          showSpinner(false);
+          showMessage('Publish Failed: ' + err, 'error');
+        })
+        .publishDataToSheet(dataType, sheetName, selectedClasses);
+    }
+
+    function confirmClearCurrentSheet(dataType) {
+      if (!confirm('⚠️ All Marks After Column G In The CURRENT Sheet Will Be Cleared. Confirm?')) return;
+      document.getElementById('publishSetupModal').style.display = 'none';
+      showSpinner(true);
+      google.script.run
+        .withSuccessHandler(res => {
+          showSpinner(false);
+          const r = JSON.parse(res);
+          showMessage(r.message || 'Cleared!', r.success ? 'Success' : 'error');
+        })
+        .withFailureHandler(err => {
+          showSpinner(false);
+          showMessage('Clear Failed: ' + err, 'error');
+        })
+        .clearCurrentSheetMarks(dataType);
+    }
     // ==================== FEE REPORT FUNCTIONS ====================
     let feeReportClasses = [];
     let feeReportStudents = [];
@@ -10794,21 +11071,37 @@
       const dateSection = document.getElementById('fee-datewiseDateResult');
       if (dateSection) dateSection.innerHTML = '';
       const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-      currentMonthName = months[new Date().getMonth()];
-
-      section.innerHTML = `
-        <h3 style="color: #28a745; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
-          <span><i class="bi bi-calendar-event"></i> MONTH: ${currentMonthName}</span>
-          <button class="btn btn-success" style="padding: 5px 12px; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; border-radius: 5px;" onclick="triggerBulkFeeAdd('${currentMonthName}')" title="Bulk Add Monthly Fee For All Students">
+      if (!currentMonthName) currentMonthName = months[new Date().getMonth()];
+      const feeMonthOptions = ['APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC','JAN','FEB','MAR']
+        .map(m => `<option value="${m}" ${m === currentMonthName ? 'selected' : ''}>${m}</option>`).join('');
+      const userRoleFee = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")).role : '';
+      const addFeeBtn = userRoleFee === 'PRO' ? `
+          <button class="btn btn-success" style="padding: 5px 12px; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; border:1px solid #e8f5e9; border-radius: 5px;" onclick="triggerBulkFeeAdd(currentMonthName)" title="Bulk Add Monthly Fee For All Students">
             <i class="bi bi-plus-lg" style="font-weight: bold;"></i> Add Fee
-          </button>
+          </button>` : '';
+      section.innerHTML = `
+        <h3 style="color: #28a745; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="display:flex; align-items:center; gap:6px; background:#e8f5e9; border:1px solid #28a745; border-radius:5px; padding:5px 10px; font-size:0.8rem; cursor:pointer;" onclick="document.getElementById('feeMonthDropdown').focus()">
+            <i class="bi bi-calendar-event"></i>
+            <span>MONTH:</span>
+            <select id="feeMonthDropdown" style="border:none; background:transparent; color:#28a745; font-weight:700; font-size:0.9rem; cursor:pointer; outline:none;" onchange="onFeeMonthChange(this.value)">
+              ${feeMonthOptions}
+            </select>
+          </span>
+          ${addFeeBtn}
         </h3>
         <p style="color: #666; margin-bottom: 10px;">Select A Class To View Fee Details</p>
         <div class="class-grid" id="feeReportClassGrid"></div>
       `;
       loadFeeReportClasses();
     }
-
+    function onFeeMonthChange(newMonth) {
+      currentMonthName = newMonth;
+      // Agar class already select thi, to us class ka report dobara load karo
+      if (currentFeeReportClass) {
+        selectFeeReportClass(currentFeeReportClass);
+      }
+    }
     function loadFeeReportClasses() {
       loadClassesWithCache(classes => {
         if (!classes.includes('All')) {
@@ -10897,7 +11190,10 @@
               <small style="color:#666;">FATHER: ${student.fatherName}</small>
             </td>
             <td>
-              <div style="font-size: 0.8rem; color: #666; margin-bottom: 3px;">Fee For ${currentMonthName}</div>
+              <div style="display:flex; align-items:center; gap:6px; margin-bottom:3px;">
+                ${userRole === 'PRO' ? `<span onclick="openFeeInfoDialog('${student.uid}', '${student.name}')" title="Monthly Fee Info & Note" style="cursor:pointer; color:#667eea; font-size:0.8rem;"><i class="bi bi-info-circle-fill"></i></span>` : ''}
+                <span style="font-size:0.8rem; color:#444; font-weight:600;" id="monthfee-label-${student.uid}">${currentMonthName} <span style="color:#28a745;" id="monthfee-amt-${student.uid}">...</span>/Mo.</span>
+              </div>
               <div style="display:flex; align-items:center;">
                 <div id="fee-${student.uid}" style="font-size: 1.2rem; font-weight: 700; color: #28a745;">Loading...</div>
                 ${editIcon}
@@ -10908,7 +11204,6 @@
               <div class="action-icons" style="display: flex; gap: 15px;">
                 <span title="Call Parent" style="cursor:pointer; color: #28a745; font-size:1.3rem;" onclick="callParentWithNote('${student.uid}', '${student.name}', '${student.phone}')"><i class="bi bi-telephone"></i></span>
                 <a href="javascript:void(0)" onclick="sendWhatsAppMessage('${student.uid}', '${student.name}', '${student.fatherName}', '${student.phone}')" title="Send WhatsApp Message" style="text-decoration:none; color: #25D366; font-size: 1.3rem;"><i class="bi bi-whatsapp"></i></a>
-                <span title="Set Fee Date" style="cursor:pointer; color: #17a2b8; font-size:1.3rem;" onclick="openFeeDatePicker('${student.uid}')"><i class="bi bi-calendar-event"></i></span>
                 <span title="View/Add Note" style="cursor:pointer; color: #f59e0b;; font-size:1.3rem;" onclick="openFeeNoteDialog('${student.uid}', '${student.name}')"><i class="bi bi-journal-text"></i></span>
               </div>
             </td>
@@ -11010,7 +11305,10 @@
                             <strong style="color: #333; font-size: 0.95rem;">${s.name}</strong><br>
                             <small style="color: #667eea; font-weight: 500;">Class: ${s.class}</small>
                         </td>
-                        <td style="padding: 10px; color:#28a745; font-weight:bold; font-size: 0.95rem;">₹${s.amount}</td>
+                        <td style="padding: 10px; color:#28a745; font-weight:bold; font-size: 0.95rem;">
+                          ₹${s.amount}
+                          <br><small style="color:#888; font-weight:normal; font-size:0.75rem;">${s.log && s.log.type ? s.log.type : 'School Fee'}</small>
+                        </td>
                         <td style="padding: 10px; font-weight: 600; color: #444; font-size: 0.9rem;">${studentPhone}</td>
                         <td style="padding: 10px; text-align: center;" class="no-print">
                             <button class="btn btn-sm btn-primary" style="padding: 5px 10px; font-size: 0.75rem; background: #667eea; border: none; border-radius: 4px;" onclick="regenerateReceipt('${s.uid}', '${s.name}', '${s.class}', '${logStr}')">
@@ -11035,7 +11333,9 @@
             'Roll Number': '-', 
             'currentPayment': log.payAmount,
             'discount': log.discount || 0,
-            'Remaining Amount': log.remainingAmount
+            'Remaining Amount': log.remainingAmount,
+            'feeType': log.type || '',          // ✅ NEW: JSON me saved type use karo
+            'monthName': log.monthName || ''
         };
         // Using existing setup to preview Receipt and populate Print/Share/Download Modal
         printFeeReceipt(feeData, 'added');
@@ -11224,15 +11524,24 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
                 // Agar normal fee action galti se issme aa jaye to ignore ho jayegi
                 if(!item.category) return;
                 
-                let dateStr = item.dateAdded ? new Date(item.dateAdded).toLocaleDateString('en-IN') : 'N/A';
-                let statusColor = item.status === 'Provided' ? '#28a745' : '#dc3545';
-                html += `<tr>
-                    <td>${dateStr}</td>
-                    <td><strong style="color:#555;">${item.category}</strong> <br> <small style="color:#888;">${item.subCategory}</small></td>
-                    <td style="font-weight:bold;">${item.item}</td>
-                    <td>₹${item.price}</td>
-                    <td style="color: ${statusColor}; font-weight: bold;">${item.status}</td>
-                </tr>`;
+            let dateStr = item.dateAdded ? new Date(item.dateAdded).toLocaleDateString('en-IN') : 'N/A';
+            let statusColor = item.status === 'Provided' ? '#28a745' : '#dc3545';
+            let statusCell = `<span style="color: ${statusColor}; font-weight: bold;">${item.status}</span>`;
+            if (item.status === 'Provided' && item.dateProvided) {
+                let providedDate = new Date(item.dateProvided).toLocaleDateString('en-IN');
+                statusCell += `<br><small style="color:#555; font-weight:normal;">${providedDate}</small>`;
+            }
+            if (item.status === 'Refunded' && item.dateRefunded) {
+                let refundedDate = new Date(item.dateRefunded).toLocaleDateString('en-IN');
+                statusCell += `<br><small style="color:#555; font-weight:normal;">${refundedDate}</small>`;
+            }
+            html += `<tr>
+                <td>${dateStr}</td>
+                <td><strong style="color:#555;">${item.category}</strong> <br> <small style="color:#888;">${item.subCategory}</small></td>
+                <td style="font-weight:bold;">${item.item}</td>
+                <td>₹${item.price}</td>
+                <td>${statusCell}</td>
+            </tr>`;
             });
             html += `</tbody></table>`;
             continue; // Normal fee loop skip kar dega items ke liye
@@ -11247,7 +11556,7 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
                   <th width="20%">Date & Time</th>
                   <th width="15%">Action</th>
                   <th width="20%">Fee Type</th>
-                  <th width="20%">Mode / Details</th>
+                  <th width="20%">Details</th>
                   <th width="15%">Change</th>
                   <th width="10%">Balance</th>
                 </tr>
@@ -11268,7 +11577,18 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
             if (log.discount && log.discount > 0) modeOrDetail += ` <span style="color:#1976d2; font-weight:bold;">(₹${log.discount} Discount)</span>`; 
             if (log.lateFine && log.lateFine > 0) modeOrDetail += ` <span style="color:#dc3545; font-weight:bold;">(₹${log.lateFine} Fine)</span>`; 
             
-            html += ` <tr> <td>${log.date || 'N/A'}</td> <td style="color: ${actionColor}; font-weight: bold;">${log.action}</td> <td>${log.type || 'N/A'}</td> <td>${modeOrDetail}</td> <td style="color: ${actionColor}; font-weight: bold;">${changeVal}</td> <td><strong>${balance}</strong></td> </tr> `; 
+            // Date sirf DD/MM/YYYY format mein dikhao (time hatao)
+            let displayDate = 'N/A';
+            if (log.date) {
+                // Format: "MM/DD/YYYY, HH:MM:SS AM/PM" → DD/MM/YYYY
+                const parts = log.date.split(',')[0].trim().split('/');
+                if (parts.length === 3) {
+                    displayDate = parts[1] + '/' + parts[0] + '/' + parts[2]; // DD/MM/YYYY
+                } else {
+                    displayDate = log.date;
+                }
+            }
+            html += ` <tr> <td>${displayDate}</td> <td style="color: ${actionColor}; font-weight: bold;">${log.action}</td> <td>${log.type || 'N/A'}</td> <td>${modeOrDetail}</td> <td style="color: ${actionColor}; font-weight: bold;">${changeVal}</td> <td><strong>${balance}</strong></td> </tr> `;
           });
           html += `</tbody></table>`;
         }
@@ -11306,18 +11626,94 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
     }
     // ==================== BULK FEE ADDITION LOGIC ====================
     function triggerBulkFeeAdd(monthName) {
-      if(!confirm(`Are You Sure You Want To Add ${monthName} Fee For ALL Students?`)) return;
-      
+      // Popup modal banao agar nahi hai
+      let setupModal = document.getElementById('bulkFeeSetupModal');
+      if (!setupModal) {
+        setupModal = document.createElement('div');
+        setupModal.id = 'bulkFeeSetupModal';
+        setupModal.className = 'overlay-container';
+        setupModal.style.zIndex = '6000';
+        document.body.appendChild(setupModal);
+      }
+
+      // Cache se classes lo
+      loadClassesWithCache(function(allClasses) {
+        const filtered = allClasses.filter(c => c !== 'All');
+
+        // 2 columns mein class checkboxes banao
+        let checkboxRows = '';
+        for (let i = 0; i < filtered.length; i += 2) {
+          const cls1 = filtered[i];
+          const cls2 = filtered[i + 1];
+          checkboxRows += `<div style="display:flex; gap:10px; margin-bottom:8px;">`;
+          checkboxRows += `
+            <label style="flex:1; display:flex; align-items:center; gap:8px; background:#f0fdf4; border:2px solid #86efac; border-radius:8px; padding:8px 12px; cursor:pointer; font-weight:600; font-size:1rem;">
+              <input type="checkbox" value="${cls1}" checked style="width:18px; height:18px; accent-color:#28a745; cursor:pointer;">
+              ${cls1}
+            </label>`;
+          if (cls2 !== undefined) {
+            checkboxRows += `
+            <label style="flex:1; display:flex; align-items:center; gap:8px; background:#f0fdf4; border:2px solid #86efac; border-radius:8px; padding:8px 12px; cursor:pointer; font-weight:600; font-size:1rem;">
+              <input type="checkbox" value="${cls2}" checked style="width:18px; height:18px; accent-color:#28a745; cursor:pointer;">
+              ${cls2}
+            </label>`;
+          } else {
+            checkboxRows += `<div style="flex:1;"></div>`;
+          }
+          checkboxRows += `</div>`;
+        }
+
+        setupModal.innerHTML = `
+          <div class="custom-card" style="width:95%; max-width:480px; padding:25px; max-height:85vh; overflow-y:auto;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #28a745; padding-bottom:10px; margin-bottom:18px;">
+              <h5 style="margin:0; color:#28a745; font-size:1.2rem;"><i class="bi bi-gear-fill"></i> Add Fee Setup - ${monthName}</h5>
+              <button onclick="document.getElementById('bulkFeeSetupModal').style.display='none'" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:#666;">&times;</button>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <strong style="font-size:0.95rem; color:#333;">Select Classes:</strong>
+              <div style="display:flex; gap:8px;">
+                <button onclick="document.querySelectorAll('#bulkFeeSetupModal input[type=checkbox]').forEach(c=>c.checked=true)" style="font-size:0.8rem; padding:3px 10px; border:1px solid #28a745; background:#e8f5e9; color:#28a745; border-radius:5px; cursor:pointer;">All</button>
+                <button onclick="document.querySelectorAll('#bulkFeeSetupModal input[type=checkbox]').forEach(c=>c.checked=false)" style="font-size:0.8rem; padding:3px 10px; border:1px solid #dc3545; background:#fdecea; color:#dc3545; border-radius:5px; cursor:pointer;">None</button>
+              </div>
+            </div>
+
+            <div style="max-height:45vh; overflow-y:auto; padding-right:4px;">
+              ${checkboxRows}
+            </div>
+
+            <div style="margin-top:18px; display:flex; gap:10px;">
+              <button onclick="document.getElementById('bulkFeeSetupModal').style.display='none'" style="flex:1; padding:10px; border:2px solid #ccc; background:#fff; border-radius:8px; font-size:1rem; cursor:pointer; color:#555;">Cancel</button>
+              <button onclick="confirmBulkFeeAdd('${monthName}')" style="flex:2; padding:10px; background:linear-gradient(135deg,#28a745,#20c997); border:none; border-radius:8px; font-size:1rem; font-weight:700; color:#fff; cursor:pointer;">
+                <i class="bi bi-check-lg"></i> Add Fee
+              </button>
+            </div>
+          </div>
+        `;
+        setupModal.style.display = 'flex';
+      });
+    }
+
+    function confirmBulkFeeAdd(monthName) {
+      const checkboxes = document.querySelectorAll('#bulkFeeSetupModal input[type=checkbox]:checked');
+      const selectedClasses = Array.from(checkboxes).map(c => c.value);
+
+      if (selectedClasses.length === 0) {
+        showMessage('No Any Class Selected!', 'error');
+        return;
+      }
+
+      document.getElementById('bulkFeeSetupModal').style.display = 'none';
       showSpinner(true);
+
       google.script.run
         .withSuccessHandler(resStr => {
           showSpinner(false);
           const res = JSON.parse(resStr);
           if (res.success) {
             showBulkFeeSummaryPopup(res.summary, res.details, monthName);
-            // Agar pehle se koi class open hai, toh use refresh karein taaki naya fee show ho sake
             if (typeof currentFeeReportClass !== 'undefined' && currentFeeReportClass) {
-                selectFeeReportClass(currentFeeReportClass);
+              selectFeeReportClass(currentFeeReportClass);
             }
           } else {
             showMessage(res.message, 'error');
@@ -11327,7 +11723,7 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
           showSpinner(false);
           showMessage('Error: ' + err, 'error');
         })
-        .bulkAddMonthlyFeeToAll(monthName);
+        .bulkAddMonthlyFeeForClasses(monthName, selectedClasses);
     }
 
     function showBulkFeeSummaryPopup(summary, details, monthName) {
@@ -11517,6 +11913,11 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
               feeDiv.style.color = '#28a745';
               loadedFees[uid] = { display: '₹0 (Paid)', raw: 0, column: monthCol };
             }
+            // Monthly fee label update (Column S)
+            if (r.monthlyFee !== undefined) {
+              const mfAmt = document.getElementById('monthfee-amt-' + uid);
+              if (mfAmt) mfAmt.textContent = r.monthlyFee ? '₹' + r.monthlyFee : '—';
+            }
           } else {
             feeDiv.textContent = '₹0 (Paid)';
             feeDiv.style.color = '#28a745';
@@ -11549,31 +11950,25 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
     function editStudentFee(uid) {
       const info = loadedFees[uid] || { raw: 0, column: null };
       const currentAmount = info.raw || 0;
-
       const newVal = prompt("Enter New Fee Amount:\n\nThis Change Will Erase Student's Current Month Fee History. Are You Sure To Proceed?",
         currentAmount
       );
       if (newVal === null) return; // cancel
-
       const trimmed = newVal.toString().trim();
       if (trimmed === "" || isNaN(trimmed)) {
         showMessage("Invalid Amount", "error");
         return;
       }
-
       const amountNum = Number(trimmed);
       if (amountNum < 0) {
         showMessage("Amount Cannot Be Negative", "error");
         return
       }
-
       const monthColumn = info.column;
-
       if (!monthColumn) {
         showMessage("Month Column Not Found For This Student.", "error");
         return;
       }
-
       showSpinner(true);
       google.script.run
         .withSuccessHandler((res) => {
@@ -11613,6 +12008,103 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
         })
         .saveFeeData(uid, monthColumn, amountNum);
     }
+    // ==================== FEE INFO DIALOG (i icon — Monthly Fee + Note) ====================
+    function openFeeInfoDialog(uid, name) {
+      showSpinner(true);
+      let monthlyFeeVal = '', noteVal = '';
+
+      google.script.run
+        .withSuccessHandler(function(res) {
+          showSpinner(false);
+          const r = JSON.parse(res);
+          monthlyFeeVal = r.monthlyFee || '';
+          noteVal = r.note || '';
+
+          let modal = document.getElementById('feeInfoModal');
+          if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'feeInfoModal';
+            modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;';
+            document.body.appendChild(modal);
+          }
+
+          modal.innerHTML = `
+            <div style="background:white;border-radius:15px;padding:25px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+              <h4 style="margin:0 0 5px 0;color:#667eea;"><i class="bi bi-info-circle"></i> Fee Info - ${name}</h4>
+              <p style="margin:0 0 15px 0;color:#666;font-size:0.85rem;">UID: ${uid}</p>
+              <div id="feeInfoOldNotes" style="background:#f8f9fa;border-radius:8px;padding:8px 10px;margin-bottom:12px;font-size:0.78rem;color:#555;max-height:110px;overflow-y:auto;${noteVal ? '' : 'display:none;'}border:1px solid #dee2e6;white-space:normal;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                  <strong>Old Notes:</strong>
+                  <span title="Clear All Notes" onclick="clearFeeInfoNotes('${uid}')" style="cursor:pointer;color:#dc3545;font-size:1rem;line-height:1;"><i class="bi bi-trash"></i></span>
+                </div>
+                ${noteVal ? noteVal.replace(/\n/g, '<br>') : ''}
+              </div>
+              <div style="margin-bottom:12px;">
+                <label style="font-size:0.85rem;color:#555;font-weight:600;display:block;margin-bottom:5px;"><i class="bi bi-currency-rupee"></i> Monthly Fee</label>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <input type="number" id="feeInfoMonthlyInput" value="${monthlyFeeVal}" min="0" placeholder="Enter Monthly Fee" style="flex:1;border:2px solid #dee2e6;border-radius:8px;padding:8px 10px;font-size:0.95rem;box-sizing:border-box;">
+                  <span style="font-size:0.85rem;color:#666;">/Month</span>
+                </div>
+              </div>
+              <textarea id="feeInfoNoteInput" rows="4" style="width:100%;border:2px solid #dee2e6;border-radius:8px;padding:10px;font-size:0.95rem;resize:vertical;font-family:inherit;" placeholder="Write Note Here"></textarea>
+              <div style="display:flex;gap:10px;margin-top:15px;align-items:center;justify-content:flex-end;">
+                <button onclick="document.getElementById('feeInfoModal').style.display='none'" style="padding:10px 20px;background:#6c757d;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.95rem;">Cancel</button>
+                <button onclick="saveFeeInfoDialog('${uid}')" style="padding:10px 20px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.95rem;"><i class="bi bi-save"></i> Save</button>
+              </div>
+            </div>
+          `;
+          modal.dataset.uid = uid;
+          modal.style.display = 'flex';
+        })
+        .withFailureHandler(function() { showSpinner(false); })
+        .getStudentMonthlyFee(uid);
+    }
+
+    function saveFeeInfoDialog(uid) {
+      const monthlyFee = document.getElementById('feeInfoMonthlyInput').value.trim();
+      const noteText   = document.getElementById('feeInfoNoteInput').value.trim();
+
+      if (!monthlyFee && !noteText) {
+        showMessage('Fill Monthly Fee Or Note!', 'error');
+        return;
+      }
+
+      showSpinner(true);
+      google.script.run
+        .withSuccessHandler(function(res) {
+          showSpinner(false);
+          const r = JSON.parse(res);
+          if (r.success) {
+            document.getElementById('feeInfoModal').style.display = 'none';
+            if (monthlyFee) {
+              const lbl = document.getElementById('monthfee-amt-' + uid);
+              if (lbl) lbl.textContent = '₹' + monthlyFee;
+            }
+            showMessage('Saved Successfully!', 'success');
+          } else {
+            showMessage('Error: ' + (r.error || ''), 'error');
+          }
+        })
+        .withFailureHandler(function(e) { showSpinner(false); showMessage('Error: ' + e, 'error'); })
+        .saveStudentMonthlyFee(uid, monthlyFee || null, noteText || null);
+    }
+
+    function clearFeeInfoNotes(uid) {
+      if (!confirm('⚠️ Clear All Old Notes. This Will Not Be Recovered!')) return;
+      showSpinner(true);
+      google.script.run
+        .withSuccessHandler(function(res) {
+          showSpinner(false);
+          const r = JSON.parse(res);
+          if (r.success) {
+            const d = document.getElementById('feeInfoOldNotes');
+            if (d) d.style.display = 'none';
+            showMessage('Old Notes Cleared!', 'success');
+          } else showMessage('Failed: ' + (r.error || ''), 'error');
+        })
+        .withFailureHandler(function(e) { showSpinner(false); showMessage('Error: ' + e, 'error'); })
+        .clearMonthlyFeeNote(uid);
+    }
     // ==================== FEE NOTE DIALOG ====================
     function openFeeNoteDialog(uid, name) {
       // Pehle existing note fetch karo
@@ -11632,11 +12124,15 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
                 <h4 id="feeNoteModalTitle" style="margin:0 0 5px 0;color:#667eea;"><i class="bi bi-journal-text"></i> Fee Note</h4>
                 <p id="feeNoteModalSub" style="margin:0 0 15px 0;color:#666;font-size:0.85rem;"></p>
                 <div id="feeNoteExisting" style="background:#f8f9fa;border-radius:8px;padding:12px;margin-bottom:12px;font-size:0.85rem;color:#555;max-height:120px;overflow-y:auto;display:none;border:1px solid #dee2e6;white-space:pre-wrap;"></div>
+                <div style="margin-bottom:12px;">
+                  <label style="font-size:0.85rem;color:#555;font-weight:600;display:block;margin-bottom:5px;"><i class="bi bi-calendar-event"></i> Fee Date (Optional)</label>
+                  <input type="date" id="feeNoteDateInput" style="width:100%;border:2px solid #dee2e6;border-radius:8px;padding:8px 10px;font-size:0.95rem;box-sizing:border-box;">
+                </div>
                 <textarea id="feeNoteInput" rows="4" style="width:100%;border:2px solid #dee2e6;border-radius:8px;padding:10px;font-size:0.95rem;resize:vertical;font-family:inherit;" placeholder="Write Note Here"></textarea>
                 <div style="display:flex;gap:10px;margin-top:15px;align-items:center;justify-content:flex-end;">
-                  <button id="feeNoteNoAutoBtn" onclick="disableAutoFeeNotePopup()" title="Disable Note Poup" style="padding:10px 12px;background:#e9ecef;color:#495057;border:none;border-radius:8px;cursor:pointer;font-size:0.95rem;"><i class="bi bi-bell-slash"></i></button>
+                  <button id="feeNoteNoAutoBtn" onclick="disableAutoFeeNotePopup()" title="Disable Note Popup" style="padding:10px 12px;background:#e9ecef;color:#495057;border:none;border-radius:8px;cursor:pointer;font-size:0.95rem;"><i class="bi bi-bell-slash"></i></button>
                   <button onclick="document.getElementById('feeNoteModal').style.display='none'" style="padding:10px 20px;background:#6c757d;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.95rem;">Cancel</button>
-                  <button id="feeNoteSaveBtn" onclick="saveFeeNoteFromDialog()" style="padding:10px 20px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.95rem;"><i class="bi bi-save"></i> Save Note</button>
+                  <button id="feeNoteSaveBtn" onclick="saveFeeNoteFromDialog()" style="padding:10px 20px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.95rem;"><i class="bi bi-save"></i> Save</button>
                 </div>
               </div>`;
             document.body.appendChild(modal);
@@ -11666,27 +12162,42 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
       const modal = document.getElementById('feeNoteModal');
       const uid = modal.dataset.uid;
       const noteText = document.getElementById('feeNoteInput').value.trim();
-      if (!noteText) { showMessage("Note Is Empty!", "error"); return; }
-
+      const dateInputEl = document.getElementById('feeNoteDateInput');
+      const dateVal = dateInputEl ? dateInputEl.value : '';
+      // Dono empty hain toh error
+      if (!noteText && !dateVal) { showMessage("Fill Date Or Note!", "error"); return; }
+      // Date ko dd/MM/yyyy format me convert karo (agar fill ki ho)
+      let formattedDate = '';
+      if (dateVal) {
+        const parts = dateVal.split('-'); // yyyy-MM-dd
+        formattedDate = parts[2] + '/' + parts[1] + '/' + parts[0]; // dd/MM/yyyy
+      }
       showSpinner(true);
-      google.script.run
-        .withSuccessHandler(function(res) {
-          showSpinner(false);
-          const r = JSON.parse(res);
-          if (r.success) {
-            modal.style.display = 'none';
-            showMessage("Note Saved Successfully!", "success");
-          } else {
-            showMessage("Failed: " + (r.error || ""), "error");
-          }
-        })
-        .withFailureHandler(function(err) {
-          showSpinner(false);
-          showMessage("Error: " + err, "error");
-        })
-        .saveFeeNote(uid, noteText);
-    }
+      // Pehle Note Save karo (agar note fill hai)
+      function saveNoteIfNeeded(callback) {
+        if (!noteText) return callback();
+        google.script.run
+          .withSuccessHandler(function(res) { callback(); })
+          .withFailureHandler(function(err) { showSpinner(false); showMessage("Note Error: " + err, "error"); })
+          .saveFeeNote(uid, noteText);
+      }
+      // Phir Date Save karo (agar date fill hai)
+      function saveDateIfNeeded(callback) {
+        if (!formattedDate) return callback();
+        google.script.run
+          .withSuccessHandler(function(res) { callback(); })
+          .withFailureHandler(function(err) { showSpinner(false); showMessage("Date Error: " + err, "error"); })
+          .saveFeeDate(uid, formattedDate);
+      }
 
+      saveNoteIfNeeded(function() {
+        saveDateIfNeeded(function() {
+          showSpinner(false);
+          modal.style.display = 'none';
+          showMessage("Saved Successfully!", "success");
+        });
+      });
+    }
     // ==================== CLEAR OLD FEE NOTES (Column F) ====================
     function clearOldFeeNotes() {
       const modal = document.getElementById('feeNoteModal');
@@ -11729,44 +12240,8 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
         openFeeNoteDialog(uid, name);
       }, 1000);
     }
-    function openFeeDatePicker(uid) {
-      // Default today date in dd/MM/yyyy
-      const today = getTodayDate();
-      const input = prompt("Enter Fee Date (dd/MM/yyyy):", today);
-      if (input === null) return;
 
-      const val = input.trim();
-      // Basic validation: dd/MM/yyyy
-      const parts = val.split("/");
-      if (parts.length !== 3) {
-        showMessage("Invalid Date Format. Use dd/MM/yyyy", "error");
-        return;
-      }
-      const d = Number(parts[0]), m = Number(parts[1]), y = Number(parts[2]);
-      if (isNaN(d) || isNaN(m) || isNaN(y) || d < 1 || d > 31 || m < 1 || m > 12 || y < 2000) {
-        showMessage("Invalid Date", "error");
-        return;
-      }
-
-      showSpinner(true);
-      google.script.run
-        .withSuccessHandler((res) => {
-          showSpinner(false);
-          const r = JSON.parse(res);
-          if (r.success) {
-            showMessage("Fee Date Saved", "success");
-          } else {
-            showMessage("Failed: " + (r.error || r.message || ""), "error");
-          }
-        })
-        .withFailureHandler((err) => {
-          showSpinner(false);
-          showMessage("Failed: " + err, "error");
-        })
-        .saveFeeDate(uid, val);
-    }
     let currentFeeEditContext = null;
-
     function openFeeEditModal(uid) {
       if (!currentMonthName) {
         const monthNamesArr = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
@@ -11802,6 +12277,7 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
               const res = JSON.parse(resStr);
               if(res.success) {
                 currentFeeEditContext = res;
+                currentFeeEditContext.monthName = currentMonthName;
                 let dues = parseFeeValue(res.currentCellValue);
                 let todayObj = new Date();
                 let offset = todayObj.getTimezoneOffset() * 60000;
@@ -11835,7 +12311,48 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
         .withFailureHandler(err => { showSpinner(false); showMessage(err, 'error'); })
         .getInventoryAndPending(uid);
     }
-
+    function onFeeDateChanged(newDateVal) {
+      if (!newDateVal) return;
+      // <input type="date"> ki value hamesha "YYYY-MM-DD" format me hoti hai
+      const parts = newDateVal.split('-');
+      if (parts.length !== 3) return;
+      const monthNamesArr = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      const newMonthName = monthNamesArr[Number(parts[1]) - 1];
+      const uid = document.getElementById('feeEditUid').value;
+      if (!uid) return;
+      showSpinner(true);
+      google.script.run
+        .withSuccessHandler(resStr => {
+          showSpinner(false);
+          const res = JSON.parse(resStr);
+          if (!res.success) {
+            showMessage('Can Not Found This Month (' + newMonthName + ') Date In Sheet', 'error');
+            return; // purana monthCol hi rahega, kuch nahi badlega
+          }
+          // ✅ Yahi line bug fix karti hai - Save ab naye monthCol par jayega
+          currentFeeEditContext = res;
+          currentFeeEditContext.monthName = newMonthName;
+          const dues = parseFeeValue(res.currentCellValue);
+          // Add aur Collect dono tabs ek hi cell/month ko represent karte hain, dono date sync rakho
+          document.getElementById('addFeeDate').value = newDateVal;
+          document.getElementById('collectFeeDate').value = newDateVal;
+          // Add Fee tab refresh
+          document.getElementById('addFeePrevious').value = dues;
+          document.getElementById('addFeeAmount').value = '';
+          document.getElementById('addFeeLateFine').value = '0';
+          calculateAddFeeTotal();
+          // Collect Fee tab refresh
+          document.getElementById('collectFeeTotalDues').value = dues;
+          document.getElementById('collectFeeAmount').value = '';
+          document.getElementById('collectFeeDiscount').value = '0';
+          document.getElementById('collectFeeRemaining').value = dues;
+        })
+        .withFailureHandler(err => {
+          showSpinner(false);
+          showMessage(err, 'error');
+        })
+        .getStudentFeeDetailsForEdit(uid, newMonthName);
+    }
     function closeFeeEditModal() {
       document.getElementById('feeEditModal').style.display = 'none';
     }
@@ -11928,7 +12445,9 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
                   'Roll Number': studentData.rollNumber || studentData.roll || '-', 
                   'addedAmount': amount,
                   'lateFine': lateFine,
-                  'Remaining Amount': total 
+                  'Remaining Amount': total,
+                  'feeType': type,
+                  'monthName': currentFeeEditContext.monthName || currentMonthName
               }; 
               printFeeReceipt(feeData, 'add'); 
           }, 200);
@@ -11996,7 +12515,9 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
                   'Roll Number': studentData.rollNumber || studentData.roll || '-', 
                   'currentPayment': payAmt,
                   'discount': discount,
-                  'Remaining Amount': remaining
+                  'Remaining Amount': remaining,
+                  'feeType': type,
+                  'monthName': currentFeeEditContext.monthName || currentMonthName
                 }; 
                 printFeeReceipt(feeData, 'added'); 
             }, 200);
@@ -12012,7 +12533,12 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
       const addedAmt = parseFloat(feeData.addedAmount || 0);
       const lateFineAmt = parseFloat(feeData.lateFine || 0);
       const finalRemaining = parseFloat(feeData['Remaining Amount'] || 0);
-      
+      const receiptNote = (
+        (document.getElementById('collectFeeNote') && document.getElementById('collectFeeNote').value.trim()) ||
+        (document.getElementById('addFeeNote') && document.getElementById('addFeeNote').value.trim()) ||
+        ''
+      );
+      window._currentReceiptMonth = feeData.monthName || '';
       let oldRemaining = operation === 'add' 
           ? finalRemaining - addedAmt - lateFineAmt 
           : currentPaid + discountAmt + finalRemaining;
@@ -12020,8 +12546,10 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
       // Inline CSS HTML for perfect Image Capture
       const discountRowHTML = discountAmt > 0 ? `<div style="display:flex; justify-content:space-between; color:#1976d2; font-size:14px; margin:6px 0;"><span>Discount (-):</span><span>INR ${discountAmt.toFixed(2)}</span></div>` : '';
       const lateFineRowHTML = lateFineAmt > 0 ? `<div style="display:flex; justify-content:space-between; color:#d32f2f; font-size:14px; margin:6px 0;"><span>Late Fine (+):</span><span>INR ${lateFineAmt.toFixed(2)}</span></div>` : '';
-      const addedRowHTML = addedAmt > 0 ? `<div style="display:flex; justify-content:space-between; color:#d32f2f; font-size:14px; margin:6px 0;"><span>Fee Added (+):</span><span>INR ${addedAmt.toFixed(2)}</span></div>` : '';
-      const collectRowHTML = currentPaid > 0 ? `<div style="display:flex; justify-content:space-between; color:#d32f2f; font-size:14px; margin:6px 0;"><span>Paid Amount:</span><span>INR ${currentPaid.toFixed(2)}</span></div>` : '';
+      // ✅ NEW: feeType se dynamic label banao
+      const feeTypeLabel = feeData.feeType ? feeData.feeType : 'Fee';
+      const addedRowHTML = addedAmt > 0 ? `<div style="display:flex; justify-content:space-between; color:#d32f2f; font-size:14px; margin:6px 0;"><span>${feeTypeLabel} Added:</span><span>INR ${addedAmt.toFixed(2)}</span></div>` : '';
+      const collectRowHTML = currentPaid > 0 ? `<div style="display:flex; justify-content:space-between; color:#1976d2; font-size:14px; margin:6px 0;"><span>Paid ${feeTypeLabel}:</span><span>INR ${currentPaid.toFixed(2)}</span></div>` : '';
 
       const calcBoxContent = operation === 'add' ? `
         <div style="display:flex; justify-content:space-between; font-size:14px; margin:6px 0;"><span>Previous Dues:</span><span>INR ${oldRemaining.toFixed(2)}</span></div> 
@@ -12047,11 +12575,12 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
           </div> 
           <div style="text-align:center; color:#28a745; font-weight:bold; border:2px solid #28a745; width:max-content; margin:20px auto 10px auto; padding:4px 15px; transform:rotate(-5deg); border-radius:4px; font-size:14px;">
             ${operation === 'add' ? 'FEE ADDED' : 'PAID & REGISTERED'}
-          </div> 
+          </div>
           <div style="margin-top:25px; display:flex; justify-content:space-between; font-size:11px; color:#555;"> 
             <span>Receiver Sign: _________</span> 
             <span>Parent Sign: _________</span> 
-          </div> 
+          </div>
+          ${receiptNote ? `<div style="margin-top:10px; border-top:1px dashed #ccc; padding-top:8px; font-size:11px; color:#555;"><strong>Note:</strong> ${receiptNote}</div>` : ''}
         </div>
       `;
       
@@ -12116,7 +12645,7 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
         try {
           await navigator.share({
             title: "Fee Receipt",
-            text: "School Fee Receipt",
+            text: (window._currentReceiptMonth ? window._currentReceiptMonth + ' Fee Receipt' : 'Regenerated Previous Fee Receipt'),
             files: [preProcessedReceiptFile]
           });
         } catch (error) {
@@ -12133,14 +12662,11 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
       printWindow.document.close(); 
       setTimeout(() => { printWindow.print(); printWindow.close(); }, 500);
     }
-
     // Final backend trigger
     function executeFeeSave(newCellValue) {
       let uid = document.getElementById('feeEditUid').value;
-      
       let actionType = '';
       let payloadStr = '[]';
-
       // Find out what is being saved: Addition to cart or Providing items
       if (document.getElementById('addFeeSection').style.display === 'block') {
           if (cartItems.length > 0) {
@@ -12148,12 +12674,14 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
               payloadStr = JSON.stringify(cartItems);
           }
       } else {
-          if (providedItems.length > 0) {
+          if (refundItems.length > 0) {
+              actionType = 'REFUND';
+              payloadStr = JSON.stringify(refundItems);
+          } else if (providedItems.length > 0) {
               actionType = 'PROVIDE';
               payloadStr = JSON.stringify(providedItems);
           }
       }
-
       showSpinner(true);
       google.script.run
         .withSuccessHandler(resStr => {
@@ -12184,6 +12712,7 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
             // Wipe carts to prevent duplicate saving
             cartItems = [];
             providedItems = [];
+            refundItems = [];  // ← Naya
           } else {
             showMessage(res.message, 'error');
           }
@@ -12951,25 +13480,55 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
             .withSuccessHandler(res => {
                 showSpinner(false);
                 const data = JSON.parse(res);
-                if (data.success) { renderHwSyllabusInputs(data.types, data.existing, data.threshold); }
+                if (data.success) {
+                    // ✅ NEW: Total Chapters bhi load karo Col E se
+                    if (data.totalChapters !== '' && data.totalChapters !== null && data.totalChapters !== undefined) {
+                        document.getElementById('hwTotalChapters').value = data.totalChapters;
+                    }
+                    renderHwSyllabusInputs(data.types, data.existing, data.threshold, data.totalChapters);
+                }
                 else { playSound('error'); showMessage(data.message, 'error'); }
             })
             .withFailureHandler(err => { showSpinner(false); playSound('error'); showMessage('Error: ' + err, 'error'); })
             .getHwSyllabusData(rowNum);
     }
 
-    function renderHwSyllabusInputs(types, existing, threshold) {
+    function renderHwSyllabusInputs(types, existing, threshold, totalChapters) {
         const container = document.getElementById('hwSyllabusTypeInputs');
         const thresholdInput = document.getElementById('hwSyllabusThreshold');
         if (threshold !== undefined && threshold !== null && threshold !== '') {
             thresholdInput.value = threshold;
         }
+
+        // ✅ NEW: Threshold chapters calculate karo
+        // Formula: totalChapters * threshold% / 100, round to nearest integer
+        const totalCh = parseFloat(totalChapters) || 0;
+        const threshPct = parseFloat(threshold) || 0;
+        const thresholdChapters = (totalCh > 0 && threshPct > 0)
+            ? Math.round(totalCh * threshPct / 100)
+            : 0;
+
         let html = '';
         types.forEach(type => {
             const val = (existing && existing[type] !== undefined) ? existing[type] : '';
+
+            // ✅ NEW: Label mein (3) style bracket show karo, aur max set karo
+            const bracketLabel = thresholdChapters > 0
+                ? `${type} <span style="color:#e74c3c; font-size:0.75rem;">(${thresholdChapters})</span>`
+                : type;
+
+            const maxAttr = thresholdChapters > 0 ? `max="${thresholdChapters}"` : '';
+            const titleAttr = thresholdChapters > 0
+                ? `title="Max allowed: ${thresholdChapters} chapters"`
+                : '';
+
             html += `<div style="flex: 1 1 calc(50% - 4px); min-width: 130px;">
-                <label style="font-size:0.78rem; color:#555; font-weight:600; display:block; margin-bottom:3px;">${type}</label>
-                <input type="number" class="text-input syllabus-type-input" data-type="${type}" value="${val}" placeholder="0" style="width:100%; padding:7px 8px; font-size:0.9rem;" min="0">
+                <label style="font-size:0.78rem; color:#555; font-weight:600; display:block; margin-bottom:3px;">${bracketLabel}</label>
+                <input type="number" class="text-input syllabus-type-input" data-type="${type}"
+                    value="${val}" placeholder="0"
+                    style="width:100%; padding:7px 8px; font-size:0.9rem;" 
+                    min="0" ${maxAttr} ${titleAttr}
+                    oninput="this.value = Math.min(Math.max(this.value, 0), ${thresholdChapters > 0 ? thresholdChapters : 99999})">
             </div>`;
         });
         container.innerHTML = html;
@@ -20278,7 +20837,7 @@ function deleteDocPreset() {
     let globalPendingItems = [];
     let cartItems = [];
     let providedItems = [];
-
+    var refundItems = [];
     function handleFeeTypeChange(mode) {
         const type = document.getElementById(mode + 'FeeType').value;
         const validTypes = ['Book Fee', 'Dress Fee', 'Other Fee'];
@@ -20293,11 +20852,18 @@ function deleteDocPreset() {
                 renderCart();
             }
         } else if (mode === 'collect') {
-            document.getElementById('inventoryPendingContainer').style.display = isValid && globalPendingItems.some(i => i.status === 'Pending') ? 'block' : 'none';
+            const hasPending  = globalPendingItems.some(i => i.status === 'Pending');
+            const hasProvided = globalPendingItems.some(i => i.status === 'Provided');
+            
+            document.getElementById('inventoryPendingContainer').style.display = isValid && hasPending ? 'block' : 'none';
+            document.getElementById('refundItemsBtnContainer').style.display  = isValid && hasProvided ? 'block' : 'none';
+            
             if (isValid) {
                 renderPendingItems();
             } else {
                 providedItems = [];
+                refundItems = [];
+                document.getElementById('refundItemsContainer').style.display = 'none';
             }
         }
     }
@@ -20434,6 +21000,71 @@ function deleteDocPreset() {
             if (checkbox) checkbox.checked = true;
         });
     }
+    // ===== REFUND FUNCTIONS =====
+
+    function toggleRefundMode() {
+      const container = document.getElementById('refundItemsContainer');
+      const isHidden = container.style.display === 'none';
+      container.style.display = isHidden ? 'block' : 'none';
+      if (isHidden) renderRefundItems();
+    }
+
+    function renderRefundItems() {
+      const list = document.getElementById('invRefundList');
+      const provided = globalPendingItems.filter(i => i.status === 'Provided');
+      if (provided.length === 0) {
+        list.innerHTML = '<span style="font-size:0.85rem; color:#666;">No provided items found.</span>';
+        return;
+      }
+      list.innerHTML = provided.map(p => `
+        <label style="display:flex; flex-direction:column; min-width:130px; background:white; border:1px solid #f5c6cb; padding:8px; border-radius:6px; cursor:pointer; flex-shrink:0;">
+          <div style="display:flex; align-items:center; gap:5px;">
+            <input type="checkbox" value="${p.id}" onchange="toggleRefundItem('${p.id}', this.checked, ${p.price})" style="width:16px; height:16px;">
+            <span style="font-weight:bold; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${p.item}">${p.item}</span>
+          </div>
+          <div style="font-size:0.75rem; color:#dc3545; margin-top:4px; font-weight:bold;">₹${p.price}</div>
+        </label>
+      `).join('');
+    }
+
+    function toggleRefundItem(id, isChecked, price) {
+      if (isChecked) {
+        if (!refundItems.includes(id)) {
+          refundItems.push(id);
+          // Pay Amount mein price add karo
+          let current = parseFloat(document.getElementById('collectFeeAmount').value) || 0;
+          document.getElementById('collectFeeAmount').value = current + parseFloat(price);
+          calculateCollectFeeRemaining();
+        }
+      } else {
+        refundItems = refundItems.filter(i => i !== id);
+        // Pay Amount se price hatao
+        let current = parseFloat(document.getElementById('collectFeeAmount').value) || 0;
+        document.getElementById('collectFeeAmount').value = Math.max(0, current - parseFloat(price));
+        calculateCollectFeeRemaining();
+      }
+      // Mode auto Refund set karo
+      if (refundItems.length > 0) {
+        document.getElementById('collectFeeMode').value = 'Refund';
+      }
+    }
+
+    function markAllRefundItems() {
+      const provided = globalPendingItems.filter(i => i.status === 'Provided');
+      provided.forEach(p => {
+        if (!refundItems.includes(p.id)) {
+          refundItems.push(p.id);
+          let current = parseFloat(document.getElementById('collectFeeAmount').value) || 0;
+          document.getElementById('collectFeeAmount').value = current + parseFloat(p.price);
+          calculateCollectFeeRemaining();
+        }
+        const cb = document.querySelector(`#invRefundList input[value="${p.id}"]`);
+        if (cb) cb.checked = true;
+      });
+      if (refundItems.length > 0) {
+        document.getElementById('collectFeeMode').value = 'Refund';
+      }
+    }
     // ==================== INVENTORY REPORT FRONTEND ====================
 
 function showInventoryReportUI() {
@@ -20518,7 +21149,18 @@ function generateInvByItems() {
             showSpinner(false);
             const data = JSON.parse(res);
             if (!data.success) return showMessage(data.message, 'error');
- 
+             let highestItem = null, highestUnits = 0;
+            let totalStockVal = 0, totalSalesVal = 0, totalProfit = 0;
+            data.data.forEach(item => {
+                if ((item.salesUnits || 0) > highestUnits) {
+                    highestUnits = item.salesUnits || 0;
+                    highestItem = item;
+                }
+                totalStockVal  += (item.stockValue || 0);
+                totalSalesVal  += (item.totalSales || 0);
+                totalProfit    += (item.totalSales || 0) - ((item.price || 0) * (item.salesUnits || 0));
+            });
+            const fmtN = v => '₹' + v.toLocaleString('en-IN',{minimumFractionDigits:2});
             let html = `
                 <div style="position: relative;">
                     <button class="modern-download-btn no-print" title="Download as Excel" onclick="downloadReportToExcel(this.parentElement, 'InventoryItems')">
@@ -20531,7 +21173,25 @@ function generateInvByItems() {
                   <h3 style="text-align:center; margin:10px 0; color:#17a2b8;">INVENTORY ITEMS REPORT</h3>
                   <p style="text-align:center; margin-bottom:15px; font-size:1rem; color:#555;">CATEGORY: ${cat} | SUB-CATEGORY: ${subCat}</p>
                 </div>
-                <div class="table-responsive">
+                <div class="report-grid">
+                    <div class="report-item total">
+                        <div class="report-value">${highestItem ? highestItem.item : '—'}</div>
+                        <div class="report-label">Top: ${highestUnits} | ${highestItem ? fmtN(highestItem.totalSales||0) : '—'}</div>
+                    </div>
+                    <div class="report-item present">
+                        <div class="report-value">${fmtN(totalStockVal)}</div>
+                        <div class="report-label">Total Stock</div>
+                    </div>
+                    <div class="report-item absent">
+                        <div class="report-value">${fmtN(totalSalesVal)}</div>
+                        <div class="report-label">Total Sales</div>
+                    </div>
+                    <div class="report-item percent">
+                        <div class="report-value">${fmtN(totalProfit)}</div>
+                        <div class="report-label">Profit Margin</div>
+                    </div>
+                </div>
+                <div class="table-responsive" style="margin-top:20px; max-height:65vh; overflow-y:auto; border:1px solid #dee2e6; border-radius:8px;">
                     <table class="report-table">
                         <thead>
                             <tr>
@@ -21486,7 +22146,7 @@ function printFeeReceipt_Razorpay(feeData, transactionId) {
   const receiptHTML = `
     <div style="font-family:'Segoe UI', sans-serif; background:#fff; position:relative; padding:10px;">
       <div style="text-align:center; font-weight:650; font-size:15px; color:#1e40af; margin-bottom:2px;">NEW JEEVAN MISSION SCHOOL</div>  <!-- NEEDS EDIT -->
-      <div style="text-align:center; font-size:10px; margin-bottom:15px; border-bottom:1px solid #aaa; padding-bottom:6px; color:#444;">FEE PAYMENT RECEIPT — ONLINE PAYMENT</div>  <!-- NEEDS EDIT -->
+      <div style="text-align:center; font-size:10px; margin-bottom:15px; border-bottom:1px solid #aaa; padding-bottom:6px; color:#444;">FEE PAYMENT RECEIPT — ONLINE PAYMENT</div>
       <table style="width:100%; font-size:13px; margin-bottom:15px; border-collapse: collapse;">
         <tr><td style="padding:3px 0;"><strong>ID:</strong> ${feeData['Student ID'] || 'N/A'}</td><td align="right" style="padding:3px 0;"><strong>Date:</strong> ${new Date().toLocaleDateString('en-IN')}</td></tr>
         <tr><td colspan="2" style="padding:3px 0;"><strong>Name:</strong> ${feeData['Student Name'] || 'N/A'}</td></tr>
