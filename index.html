@@ -2266,13 +2266,16 @@
       border: 2px solid #dee2e6;
       border-radius: 12px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
       font-size: 1.3rem;
       color: #000000;
       cursor: pointer;
       transition: all 0.3s;
       text-decoration: none;
+      padding: 2px;
     }
     
     .app-square-btn:hover {
@@ -2282,10 +2285,26 @@
     
     .app-square-btn i {
       transition: transform 0.3s ease;
+      font-size: 1.05rem;
+      line-height: 1;
+      margin-top: -2px;
     }
 
     .app-square-btn:hover i {
-      transform: scale(1.3);
+      transform: scale(1.2);
+    }
+
+    .app-square-btn .app-level-label {
+      font-size: 0.45rem;
+      line-height: 1;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #6c757d;
+      margin-top: 3px;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     @media (max-width: 768px) {
       .apps-scroll-container {
@@ -3281,7 +3300,7 @@
 
   <!-- SIDEBAR BOTTOM BUTTONS -->
   <div style="margin-top: auto; display: flex; flex-direction: column; gap: 0;">
-    <p style="text-align: center; font-size: 0.72rem; color: #adb5bd; margin: 0 0 8px 0;">App Version - 11.9</p>
+    <p style="text-align: center; font-size: 0.72rem; color: #adb5bd; margin: 0 0 8px 0;">App Version - 12.1</p>
     <div style="display: flex; gap: 10px;">
       <button class="btn-custom" style="flex: 1; background: #ffc107; color: #333;" onclick="openSwitchAccountModal()">
         <i class="bi bi-people-fill"></i> Switch
@@ -3500,7 +3519,7 @@
           <!-- Row 2: Notice/Complaint Text -->
           <div>
             <div class="nf-label" id="nfTextLabel">Notice Message</div>
-            <textarea id="nfMessage" class="nf-input" rows="6" style="resize:vertical;" placeholder="Notice likhein..."></textarea>
+            <textarea id="nfMessage" class="nf-input" rows="6" style="resize:vertical;" placeholder="Write Notice Here"></textarea>
             <div id="nfAnonNotice" style="display:none; margin-top:4px; font-size:0.72rem; color:#e74c3c; font-weight:500;">
               <i class="bi bi-lock-fill"></i> Only Admin Can View This Message
             </div>
@@ -3592,7 +3611,7 @@
           <button class="close-btn" onclick="closeBranchPopup()">&times;</button>
         </div>
         <div style="overflow-y: auto; flex: 1; text-align: left; padding-right: 5px; margin-bottom: 15px;">
-          <a href="https://script.google.com/macros/s/AKfycbyow1f6InqT_a_rwEQnpVwlcI8ger4cAzucicYA5wMEDt9h-GkO2AdhKtZcuxPv8mNy/exec" target="_blank" style="text-decoration: none;"> <!-- NEEDS EDIT -->
+          <a href="https://mynjmschool.github.io/mb/" target="_blank" style="text-decoration: none;"> <!-- NEEDS EDIT -->
             <div class="cached-account-item active">
               <div class="cached-account-info">
                 <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">
@@ -3605,7 +3624,7 @@
               </div>
             </div>
           </a>
-          <a href="https://script.google.com/macros/s/AKfycbwccKf2sfZqOUW-82wABmH0gzO3QtBvb5JiW0yUcJJHT3VkMZXIcahg4GtrO3Nzzr-i/exec" target="_blank" style="text-decoration: none;"> <!-- NEEDS EDIT -->
+          <a href="https://mynjmschool.github.io/bb/" target="_blank" style="text-decoration: none;"> <!-- NEEDS EDIT -->
             <div class="cached-account-item">
               <div class="cached-account-info">
                 <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">
@@ -3808,8 +3827,8 @@
       
       <div id="editStudentModal" class="overlay-container" style="display: none; z-index: 4000;">
         <div class="custom-card" style="width: 95%; max-width: 800px; height: 90%; overflow-y: auto; text-align: left; padding: 25px;">
-          <div class="modal-header" style="border-bottom: 2px solid #28a745; padding-bottom: 10px; margin-bottom: 20px;">
-            <h5 style="margin: 0; color: #28a745; font-size: 1.3rem;"><i class="bi bi-pencil-square"></i> Edit Student Details</h5>
+          <div id="editStudentModalHeader" class="modal-header" style="border-bottom: 2px solid #28a745; padding-bottom: 10px; margin-bottom: 20px;">
+            <h5 id="editStudentModalTitle" style="margin: 0; color: #28a745; font-size: 1.3rem;"><i class="bi bi-pencil-square"></i> Edit Student Details</h5>
             <button class="close-btn" onclick="document.getElementById('editStudentModal').style.display='none'">&times;</button>
           </div>
           <form id="editStudentForm" onsubmit="saveStudentEdit(event)">
@@ -3822,6 +3841,7 @@
           </form>
         </div>
       </div>
+
 
       <div id="dynamicColModal" class="overlay-container" style="display: none; z-index: 4000;">
           <div class="custom-card" style="height: auto; max-height: 90%; overflow-y: auto;">
@@ -4576,7 +4596,10 @@
             <button class="close-btn" onclick="document.getElementById('addItemModal').style.display='none'">&times;</button>
           </div>
           <div class="form-group"><label>Category</label><input type="text" id="newItemCat" class="text-input" placeholder="Eg: Books"></div>
-          <div class="form-group"><label>Sub-Category</label><input type="text" id="newItemSubCat" class="text-input" placeholder="Eg: Five"></div>
+          <div style="display: flex; gap: 10px;">
+            <div class="form-group" style="flex:1;"><label>Sub-Category</label><input type="text" id="newItemSubCat" class="text-input" placeholder="Eg: Five"></div>
+            <div class="form-group" style="flex:0.55;"><label style="color:#e67e22; font-weight:600;">Min. Qty</label><input type="number" id="newItemMinQty" class="text-input" placeholder="0" min="0"></div>
+          </div>
           <div class="form-group"><label>Item Name</label><input type="text" id="newItemName" class="text-input" placeholder="Eg: Math"></div>
           <div style="display: flex; gap: 10px;">
             <div class="form-group" style="flex:1;"><label>Original Price</label><input type="number" id="newItemOPrice" class="text-input" placeholder="0"></div>
@@ -4628,7 +4651,10 @@
     <!-- ==================== TAB 6: EDIT SHEET ==================== -->
     <div id="editSheetTab" class="tab-content">
       <div class="section-title">
-        <span><i class="bi bi-table"></i> Manage Spreadsheets</span>
+        <span><i class="bi bi-table"></i> Manage Spreadsheets</span><span 
+          style="color: #d4edda; font-size: 1.2rem; cursor: pointer; user-select: none; margin-left: 10px;"
+          onclick="backupAllSheets()"
+          title="[Backup All Spreadsheets To Server]"><i class="bi bi-cloud-arrow-up"></i></span>
       </div>
       <div id="editSheetGrid" style="display: flex; flex-direction: row; gap: 10px; justify-content: center; flex-wrap: wrap;">
         <button class="btn btn-primary" style="position:relative;" onclick="loadSheetForEdit('Attendance')">
@@ -4832,7 +4858,10 @@
   <div id="feeEditModal" class="overlay-container" style="display: none; z-index: 4000;">
     <div class="custom-card" style="height: auto; max-height: 90%; overflow-y: auto;">
       <div class="modal-header">
-        <h5 style="margin: 0; color: #667eea;"><i class="bi bi-cash-coin"></i> Manage Fee</h5>
+        <div>
+          <h4 id="feeEditModalTitle" style="margin:0 0 5px 0; color:#667eea;"><i class="bi bi-cash-coin"></i> Manage Fee</h4>
+          <p id="feeEditModalSub" style="margin:0; color:#666; font-size:0.85rem; text-align: left;"></p>
+        </div>
         <button class="close-btn" onclick="closeFeeEditModal()">&times;</button>
       </div>
       
@@ -4976,7 +5005,7 @@
             </div>
             <div class="form-group">
               <label style="color:#888; font-size:0.85rem;">Receipt Note</label>
-              <textarea id="addFeeNote" class="text-input" rows="2" placeholder="Optional note to print on receipt..." style="resize:vertical; font-size:0.9rem;"></textarea>
+              <textarea id="addFeeNote" class="text-input" rows="2" placeholder="Write Optional Note To Print On Receipt" style="resize:vertical; font-size:0.9rem;"></textarea>
             </div>
             <button class="btn btn-success" style="width:100%" onclick="saveAddFee()">Save Fee</button>
           </div>
@@ -5055,7 +5084,7 @@
         <div class="ai-title"><i class="bi bi-robot"></i> AI Assistant
           <span class="ai-badge">SCHOOL</span>
         </div>
-        <button class="ai-close" onclick="toggleAiChat()" title="Band karo">✕</button>
+        <button class="ai-close" onclick="toggleAiChat()" title="Close Chat">✕</button>
       </div>
       <div class="ai-messages" id="aiMessages">
         <div class="ai-msg bot">
@@ -5158,6 +5187,49 @@
              String(d.getMonth() + 1).padStart(2, '0') + '/' + 
              d.getFullYear();
     }
+        // ==================== GITHUB API CONNECTION ====================
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKnpr1XfFIB1DTZduVfGMowSCevloWJfbTTWUteMrAsRPFU3lHLQol-A_aZ7TIXdLF/exec"; 
+      const google = {
+        script: {
+          get run() {
+            let successHandler = null;
+            let failureHandler = null;
+            
+            return new Proxy({}, {
+              get: function(target, prop) {
+                if (prop === 'withSuccessHandler') {
+                  return function(cb) { successHandler = cb; return this; };
+                }
+                if (prop === 'withFailureHandler') {
+                  return function(cb) { failureHandler = cb; return this; };
+                }
+                
+                // Jab koi actual backend function call ho
+                return function(...args) {
+                  fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: prop, args: args }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' } // CORS error se bachne ke liye text/plain
+                  })
+                  .then(res => res.json())
+                  .then(data => {
+                    if (data.error) {
+                      if (failureHandler) failureHandler(data.error);
+                      else console.error("Backend Error:", data.error);
+                    } else {
+                      if (successHandler) successHandler(data.result);
+                    }
+                  })
+                  .catch(err => {
+                    if (failureHandler) failureHandler(err.toString());
+                    else console.error("Fetch Error:", err);
+                  });
+                };
+              }
+            });
+          }
+        }
+      };
     // ==================== SIDEBAR TOGGLE ====================
     function toggleSidebar() {
       const sidebar = document.getElementById('rightSidebar');
@@ -5230,64 +5302,20 @@
         toggleSidebar();
       }
     }
-      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKnpr1XfFIB1DTZduVfGMowSCevloWJfbTTWUteMrAsRPFU3lHLQol-A_aZ7TIXdLF/exec"; 
 
-      // Ye code google.script.run ko mimic karega taki aapko apna purana code change na karna pade
-      const google = {
-        script: {
-          get run() {
-            let successHandler = null;
-            let failureHandler = null;
-            
-            return new Proxy({}, {
-              get: function(target, prop) {
-                if (prop === 'withSuccessHandler') {
-                  return function(cb) { successHandler = cb; return this; };
-                }
-                if (prop === 'withFailureHandler') {
-                  return function(cb) { failureHandler = cb; return this; };
-                }
-                
-                // Jab koi actual backend function call ho
-                return function(...args) {
-                  fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({ action: prop, args: args }),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' } // CORS error se bachne ke liye text/plain
-                  })
-                  .then(res => res.json())
-                  .then(data => {
-                    if (data.error) {
-                      if (failureHandler) failureHandler(data.error);
-                      else console.error("Backend Error:", data.error);
-                    } else {
-                      if (successHandler) successHandler(data.result);
-                    }
-                  })
-                  .catch(err => {
-                    if (failureHandler) failureHandler(err.toString());
-                    else console.error("Fetch Error:", err);
-                  });
-                };
-              }
-            });
-          }
-        }
-      };
     // ==================== APP SHORTCUTS ==================== NEEDS EDIT ==========
     function renderMoreApps() {
       const container = document.getElementById('moreAppsContainer');
       const section = document.getElementById('moreAppsSection');
-      
       // 1. Pehle purane apps ko completely hata do (Clear UI)
       if (container) container.innerHTML = ''; 
       if (section) section.style.display = 'none'; 
-      
       // 2. Ab apne saare apps yahan add karein
-      addSidebarApp('Fee Management', 'https://script.google.com/macros/s/AKfycbyyZp3I8QvxHYvYNJLIbU6NUhWeLYks8MSx59NGVj6eJNqDHC4gO9pE7PRr6zJR219X/exec', 'bi-currency-rupee', 'Admin');
-      addSidebarApp('Paper Generator', 'https://script.google.com/macros/s/AKfycbwLfYp4Rm-4RapDXJlRGXzOVic1B7h2q20Fw3R4uV5bTD5usz_vljw0HFfKL33C9b2r/exec', 'bi-file-earmark-text', 'Teacher');
-      addSidebarApp('Quiz Portal', 'https://mynjmschool.wordpress.com/test-quiz/', 'bi-patch-question', 'Student');
-      addSidebarApp('Online Class', 'https://script.google.com/macros/s/AKfycbyjMDjBHdE1AFV28m3QUcEklq6TmGW9YB0TyooTQmbpOa4Y48EQ_t12R1sSyXLcqWReWg/exec', 'bi-camera-video', 'Student');
+      addSidebarApp('Fee', 'https://script.google.com/macros/s/AKfycbyyZp3I8QvxHYvYNJLIbU6NUhWeLYks8MSx59NGVj6eJNqDHC4gO9pE7PRr6zJR219X/exec', 'bi-currency-rupee', 'Admin');
+      addSidebarApp('Paper', 'https://script.google.com/macros/s/AKfycbwLfYp4Rm-4RapDXJlRGXzOVic1B7h2q20Fw3R4uV5bTD5usz_vljw0HFfKL33C9b2r/exec', 'bi-file-earmark-text', 'Teacher');
+      addSidebarApp('Quiz', 'https://mynjmschool.wordpress.com/test-quiz/', 'bi-patch-question', 'Student');
+      addSidebarApp('Live', 'https://script.google.com/macros/s/AKfycbyjMDjBHdE1AFV28m3QUcEklq6TmGW9YB0TyooTQmbpOa4Y48EQ_t12R1sSyXLcqWReWg/exec', 'bi-camera-video', 'Student');
+      addSidebarApp('APK', 'https://drive.usercontent.google.com/download?id=1jrYneKJXSUQalzxSXeCpoxzLvvz0JhIq&export=download&authuser=0&confirm=t&uuid=ebe36a9f-1bb0-428a-a698-3e0660abf4f3&at=AAINaILtUBR9nFPapluETl4IAT2X:1782224012559', 'bi-cloud-arrow-down', 'Student');
     }
 
     // ==================== GLOBAL PROFILE PIC HELPER ====================
@@ -6128,6 +6156,8 @@
     }
     // ==================== DASHBOARD RECENT STUDENTS LOGIC ====================
     let dashboardStudentsList = [];
+    let studentFormMode = 'edit'; // 'edit' = Edit Student Details, 'add' = Add New Student (same modal/HTML reused)
+    let STUDENT_PLAN_LIMIT_CACHE = null; // last known {count, limit} from server, refreshed on every Add New Student click
     let filteredDashboardStudents = [];
     // ===== SIBLING COUNT ICON HELPER =====
     function getSiblingCountIcon(parentId, allStudents) {
@@ -6250,7 +6280,13 @@
              return s.uid.substring(0,4) === value;
           });
        } else if (type === 'feeType') {
-          filteredDashboardStudents = dashboardStudentsList.filter(s => s.feeTypes && s.feeTypes.includes(value));
+          // ← FIX: Sirf current month ke fee type se filter karo (pie chart current month dikhata hai)
+          filteredDashboardStudents = dashboardStudentsList.filter(s =>
+             s.monthsData &&
+             s.monthsData[currentMonthText] &&
+             s.monthsData[currentMonthText].feeTypesPaid &&
+             s.monthsData[currentMonthText].feeTypesPaid.includes(value)
+          );
        } else if (type === 'gender') { 
           filteredDashboardStudents = dashboardStudentsList.filter(s => String(s.gender).trim().toUpperCase() === String(value).trim().toUpperCase());
        } else if (type === 'classTrend') { 
@@ -6453,9 +6489,10 @@
                   <i class="bi bi-x-circle text-danger" onclick="removeDynamicColumn('${col.id || ''}')" style="cursor:pointer; margin-left:5px;" title="Remove Column"></i>
                 </th>
               `).join('')}
-              <th style="text-align:center; white-space: nowrap; width: 140px;">
+              <th style="text-align:center; white-space: nowrap; width: 170px;">
                 Action 
-                <button onclick="addDynamicColumn()" class="btn btn-sm btn-success" style="padding: 2px 6px; font-size: 0.8rem; margin-left: 5px; border:none; background:#28a745; color:white; border-radius:4px; cursor:pointer;" title="Add Column"><i class="bi bi-plus-lg"></i></button>
+                <button onclick="addDynamicColumn()" class="btn btn-sm btn-success" style="padding: 2px 6px; font-size: 0.8rem; margin-left: 5px; border:none; background:#28a745; color:white; border-radius:4px; cursor:pointer;" title="Add Column"><i class="bi bi-list-columns-reverse"></i></button>
+                <button onclick="openAddStudentModal()" class="btn btn-sm btn-primary" style="padding: 2px 6px; font-size: 0.8rem; margin-left: 5px; border:none; background:#667eea; color:white; border-radius:4px; cursor:pointer;" title="Add New Student"><i class="bi bi-person-plus-fill"></i></button>
               </th>
             </tr>
           </thead>
@@ -6489,7 +6526,8 @@
            `;
         } else {
            actionButtonsHtml = `
-             <button class="btn btn-primary" style="padding: 6px 12px; font-size: 0.85rem;" onclick="openEditStudentModal('${s.uid || ''}')"><i class="bi bi-pencil-square"></i> Edit</button>
+             <button class="btn btn-success" style="padding: 6px 10px; font-size: 0.85rem; margin-left: 5px;" onclick="openFeeEditModal('${s.uid || ''}', '${s.name || ''}')" title="Manage Fee"><i class="bi bi-cash-coin"></i></button>
+             <button class="btn btn-primary" style="padding: 6px 10px; font-size: 0.85rem; margin-left: 5px;" onclick="openEditStudentModal('${s.uid || ''}')"><i class="bi bi-pencil-square"></i></button>
              <button class="btn btn-danger" style="padding: 6px 10px; font-size: 0.85rem; margin-left: 5px;" onclick="confirmDeleteStudent('${s.uid || ''}', 'dashboard')" title="Delete Student (Move To Dropbox)"><i class="bi bi-trash"></i></button>
            `;
         }
@@ -7696,7 +7734,7 @@
       _editingNoticeRow = n.rowIndex;
 
       const overlay  = document.getElementById('noticeFormOverlay');
-      document.getElementById('nfTitle').innerHTML = '<i class="bi bi-pencil-fill"></i> Notice Edit Karo';
+      document.getElementById('nfTitle').innerHTML = '<i class="bi bi-pencil-fill"></i> Edit Notice';
       document.getElementById('nfTextLabel').textContent = 'Message';
       document.getElementById('nfIcon').value       = n.icon        || '';
       document.getElementById('nfHeading').value    = n.heading     || '';
@@ -7961,6 +7999,7 @@
     function openEditStudentModal(uid) {
       const student = dashboardStudentsList.find(s => s.uid === String(uid));
       if (!student) return;
+      studentFormMode = 'edit';
 
       // Define fields to map easily into inputs
       const fields = [
@@ -8003,6 +8042,104 @@
       });
 
       document.getElementById('editStudentFormContent').innerHTML = formHtml;
+
+      // Title/header ko 'Edit' mode ke colors/text par revert karna (agar pehle Add mode me khula tha)
+      const editTitleEl = document.getElementById('editStudentModalTitle');
+      if (editTitleEl) editTitleEl.innerHTML = '<i class="bi bi-pencil-square"></i> Edit Student Details';
+      const editHeaderEl = document.getElementById('editStudentModalHeader');
+      if (editHeaderEl) editHeaderEl.style.borderBottomColor = '#28a745';
+      if (editTitleEl) editTitleEl.style.color = '#28a745';
+
+      document.getElementById('editStudentModal').style.display = 'flex';
+    }
+
+    // ==================== ADD NEW STUDENT (Same Edit Modal Reused) ====================
+    // Button click hone par sabse pehle current Student Limit (default 500) backend se check karte hain.
+    function openAddStudentModal() {
+      showSpinner(true);
+      google.script.run
+        .withSuccessHandler(res => {
+          showSpinner(false);
+          let data;
+          try { data = JSON.parse(res); } catch (e) {
+            playSound('error');
+            showMessage('Error Reading Limit Info', 'error');
+            return;
+          }
+          if (!data.success) {
+            playSound('error');
+            showMessage('Error: ' + (data.message || 'Could Not Check Student Limit'), 'error');
+            return;
+          }
+          STUDENT_PLAN_LIMIT_CACHE = data; // { count, limit }
+          if (data.count >= data.limit) {
+            playSound('error');
+            showMessage(`Student Limit Reached (${data.count}/${data.limit}). Kindly Upgrade Your Plan.`, 'error');
+            return;
+          }
+          buildAddStudentFormUI();
+        })
+        .withFailureHandler(err => {
+          showSpinner(false);
+          playSound('error');
+          showMessage('Error: ' + err, 'error');
+        })
+        .getStudentCountInfo();
+    }
+
+    function buildAddStudentFormUI() {
+      studentFormMode = 'add';
+
+      // Same fields jaise Edit Student Details modal me hote hain, sirf saari values khaali
+      // aur UID ab Read Only nahi (kyunki naye student ke liye UID enter karna hoga).
+      const fields = [
+        { id: 'editUid', label: 'UID (Enter Unique UID)', val: '' },
+        { id: 'editRoll', label: 'Roll No', val: '' },
+        { id: 'editName', label: 'Student Name', val: '' },
+        { id: 'editEmail', label: 'Email', val: '' },
+        { id: 'editPhone', label: 'Phone No', val: '' },
+        { id: 'editClass', label: 'Class', val: '' },
+        { id: 'editSection', label: 'Section', val: '' },
+        { id: 'editAcYear', label: 'Academic Year', val: '' },
+        { id: 'editDob', label: 'DOB', val: '' },
+        { id: 'editGender', label: 'Gender', val: '' },
+        { id: 'editFather', label: 'Father Name', val: '' },
+        { id: 'editMother', label: 'Mother Name', val: '' },
+        { id: 'editGPhone', label: 'Guardian Phone', val: '' },
+        { id: 'editGEmail', label: 'Guardian Email', val: '' },
+        { id: 'editAddress', label: 'Permanent Address', val: '' },
+        { id: 'editCAddress', label: 'Current Address', val: '' },
+        { id: 'editAdmDate', label: 'Admission Date', val: '' },
+        { id: 'editStatus', label: 'Status', val: '' },
+        { id: 'editParentId', label: 'Parent ID', val: '' },
+        { id: 'editLink', label: 'Document Link', val: '' },
+        { id: 'editRegNo', label: 'Reg No', val: '' },
+        { id: 'editAadhar', label: 'Aadhar No', val: '' },
+        { id: 'editPen', label: 'PEN No', val: '' },
+        { id: 'editAapar', label: 'Aapar ID', val: '' },
+        { id: 'editHeight', label: 'Height', val: '' },
+        { id: 'editWeight', label: 'Weight', val: '' }
+      ];
+
+      let formHtml = '';
+      fields.forEach(f => {
+        formHtml += `
+          <div class="form-group" style="margin-bottom: 10px;">
+            <label style="color: #555; font-size: 0.85rem;">${f.label}</label>
+            <input type="text" id="${f.id}" class="text-input" style="padding: 8px; border: 1px solid #ced4da;" value="${f.val}">
+          </div>
+        `;
+      });
+
+      document.getElementById('editStudentFormContent').innerHTML = formHtml;
+
+      // Title/header ko 'Add' mode ke colors/text me badalna (same modal/HTML, sirf look badalta hai)
+      const addTitleEl = document.getElementById('editStudentModalTitle');
+      if (addTitleEl) addTitleEl.innerHTML = '<i class="bi bi-person-plus-fill"></i> Add New Student';
+      const addHeaderEl = document.getElementById('editStudentModalHeader');
+      if (addHeaderEl) addHeaderEl.style.borderBottomColor = '#667eea';
+      if (addTitleEl) addTitleEl.style.color = '#667eea';
+
       document.getElementById('editStudentModal').style.display = 'flex';
     }
 
@@ -8038,6 +8175,55 @@
         height: document.getElementById('editHeight').value,
         weight: document.getElementById('editWeight').value
       };
+
+      // ==================== ADD NEW STUDENT MODE ====================
+      // Same form/HTML reused; sirf backend call alag hoga (limit check + naya row insert)
+      if (studentFormMode === 'add') {
+        if (!updatedData.uid.trim() || !updatedData.name.trim() || !updatedData.class.trim()) {
+          showMessage('UID, Student Name & Class Bharna Zaroori Hai.', 'error');
+          return;
+        }
+        showSpinner(true);
+        google.script.run
+          .withSuccessHandler(res => {
+            const data = JSON.parse(res);
+            if (data.success) {
+              document.getElementById('editStudentModal').style.display = 'none';
+              showMessage('Student Added! Auto Syncing...', 'info');
+              // Add ke baad bhi single student auto sync, exactly Edit jaisa
+              google.script.run
+                .withSuccessHandler(function(syncRes) {
+                  showSpinner(false);
+                  playSound('success');
+                  showMessage('Student Added & Synced Successfully!', 'success');
+                  fetchRecentStudents();
+                })
+                .withFailureHandler(function(syncErr) {
+                  showSpinner(false);
+                  playSound('success');
+                  showMessage('Added! But Sync Failed: ' + syncErr, 'error');
+                  fetchRecentStudents();
+                })
+                .syncStudentToAllSheets(updatedData.uid);
+            } else {
+              showSpinner(false);
+              playSound('error');
+              // Agar backend ne bhi limit reach hone ki wajah se reject kiya
+              if (data.limitReached) {
+                showMessage(data.message || 'Kindly Upgrade Your Plan.', 'error');
+              } else {
+                showMessage('Add Failed: ' + data.message, 'error');
+              }
+            }
+          })
+          .withFailureHandler(err => {
+            showSpinner(false);
+            playSound('error');
+            showMessage('Error: ' + err, 'error');
+          })
+          .addStudentDashboard(updatedData);
+        return;
+      }
 
       showSpinner(true);
       google.script.run
@@ -8426,6 +8612,15 @@
       showSpinner(true);
       google.script.run
         .withSuccessHandler(res => {
+          const data = JSON.parse(res);
+          // NAYA CODE: Pehle yeh check nahi hota tha, isliye limit reach hone par bhi
+          // "Restored Successfully" dikh jata tha. Ab success flag zaroor check hoga.
+          if (!data.success) {
+            showSpinner(false);
+            playSound('error');
+            showMessage(data.message || 'Restore Failed', 'error');
+            return;
+          }
           showMessage('Student Restored! Auto Syncing...', 'info');
           // Restore ke baad single student auto sync
           google.script.run
@@ -8566,7 +8761,7 @@
                   th { background-color: #f8f9fa; color: #333; font-weight: 700; }
                   img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
                   @media print {
-                      @page { size: landscape; }
+                      @page
                       body { padding: 0; }
                       /* Images ko print hone dene ke liye */
                       img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -11001,7 +11196,7 @@
             </div>
 
             <div style="margin-top:18px; display:flex; gap:10px; align-items:center;">
-              <button onclick="confirmClearCurrentSheet('${dataType}')" title="Clear All Marks (Column G ke baad)" style="padding:10px 14px; border:2px solid #dc3545; background:#fff; border-radius:8px; font-size:1rem; cursor:pointer; color:#dc3545;" title="CURRENT Sheet ke marks clear karo">
+              <button onclick="confirmClearCurrentSheet('${dataType}')" title="Clear All Marks" style="padding:10px 14px; border:2px solid #dc3545; background:#fff; border-radius:8px; font-size:1rem; cursor:pointer; color:#dc3545;" title="CURRENT Sheet ke marks clear karo">
                 <i class="bi bi-x-circle"></i>
               </button>
               <button onclick="document.getElementById('publishSetupModal').style.display='none'" style="flex:1; padding:10px; border:2px solid #ccc; background:#fff; border-radius:8px; font-size:1rem; cursor:pointer; color:#555;">Cancel</button>
@@ -11176,10 +11371,11 @@
       feeReportStudents.forEach((student, idx) => {
         // Sirf PRO (Admin) login me edit and history icon dikhega
         const canSeeNote = (userRole === 'PRO' || userRole === 'TEACHER');
-        const editIcon = userRole === 'PRO' ? `
-          <span title="Edit Fee" style="cursor:pointer; font-size:1.2rem; color: #007bff; margin-left:10px;" onclick="openFeeEditModal('${student.uid}')"><i class="bi bi-pencil"></i></span>
+        const editIcon = (userRole === 'PRO' ? `
+          <span title="Edit Fee" style="cursor:pointer; font-size:1.2rem; color: #007bff; margin-left:10px;" onclick="openFeeEditModal('${student.uid}', '${student.name}')"><i class="bi bi-pencil"></i></span>
+        ` : '') + ((userRole === 'PRO' || userRole === 'TEACHER') ? `
           <span title="View Ledger" style="cursor:pointer; font-size:1.2rem; color: #007bff; margin-left:10px;" onclick="printFeeLedger('${student.uid}')"><i class="bi bi-clock"></i></span>
-        ` : '';
+        ` : '');
         html += `
           <tr style="vertical-align: middle;">
             <td>${idx + 1}</td>
@@ -11421,7 +11617,7 @@
               showSpinner(false);
               showMessage('Error Fetching School Settings: ' + err, 'error');
             })
-            .getIdCardSettings();
+            .getSchoolDetailsFromA3();
 
         })
         .withFailureHandler(err => {
@@ -12242,14 +12438,21 @@ function generateFeeLedgerHTML(student, feeData, addressPhoneText, sName) {
     }
 
     let currentFeeEditContext = null;
-    function openFeeEditModal(uid) {
+    function openFeeEditModal(uid, name) {
       if (!currentMonthName) {
         const monthNamesArr = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
         currentMonthName = monthNamesArr[new Date().getMonth()];
       }
-
       document.getElementById('feeEditUid').value = uid;
-      
+      // Header Me Student Name + UID Set Karo (Fee Note Jaisa Style)
+      let _feeModalName = name;
+      if (!_feeModalName) {
+        const _found = (typeof dashboardStudentsList !== 'undefined' ? dashboardStudentsList : []).find(s => String(s.uid) === String(uid))
+                     || (typeof feeReportStudents !== 'undefined' ? feeReportStudents : []).find(s => String(s.uid) === String(uid));
+        if (_found) _feeModalName = _found.name || '';
+      }
+      document.getElementById('feeEditModalTitle').innerHTML = '<i class="bi bi-cash-coin"></i> Manage Fee' + (_feeModalName ? ' - ' + _feeModalName : '');
+      document.getElementById('feeEditModalSub').textContent = 'UID: ' + uid;
       // RESET INVENTORY CARTS & UI
       document.getElementById('addFeeType').value = 'School Fee';
       document.getElementById('collectFeeType').value = 'School Fee';
@@ -15344,7 +15547,7 @@ function loadPinnedMarks(type, col) {
       };
 
       if (!updatedDetails.schoolId || !updatedDetails.password) {
-        showMessage('School ID Aur Password Khali Nahi Ho Sakte!', 'error');
+        showMessage('School ID And Password Can Not Be Empty!', 'error');
         return;
       }
 
@@ -15443,7 +15646,7 @@ function loadPinnedMarks(type, col) {
         appBtn.target = '_blank';
         appBtn.className = 'app-square-btn';
         appBtn.title = title; // Hover karne par native tooltip show hoga
-        appBtn.innerHTML = `<i class="${iconClass}"></i>`;
+        appBtn.innerHTML = `<i class="${iconClass}"></i><span class="app-level-label">${title}</span>`;
         
         container.appendChild(appBtn);
       }
@@ -18323,6 +18526,32 @@ function generateDocEditHTML(students, type, sheetName, bgImageRaw, elements, is
     }
 
     // ==================== DOWNLOAD ENTIRE SPREADSHEET (ALL SHEETS) ====================
+    function backupAllSheets() {
+      if (!confirm('Backup All Spreadsheets Now? This Action Will Replace Old Backup')) {
+        return;
+      }
+      showSpinner(true);
+      showMessage('Backing Up All Spreadsheets, Please Wait...', 'info');
+      google.script.run
+        .withSuccessHandler(res => {
+          showSpinner(false);
+          const result = JSON.parse(res);
+          if (!result.success) {
+            playSound('error');
+            showMessage('Error: ' + result.message, 'error');
+            return;
+          }
+          playSound('success');
+          showMessage(result.message, 'success');
+        })
+        .withFailureHandler(err => {
+          showSpinner(false);
+          playSound('error');
+          showMessage('Error Taking Backup: ' + err, 'error');
+        })
+        .backupAllSpreadsheets();
+    }
+
     function downloadEntireSpreadsheet(sheetType) {
       showSpinner(true);
       showMessage("Fetching All Sheets Data, Please Wait...", "info");
@@ -20424,7 +20653,7 @@ function deleteDocPreset() {
 
               /* ADVANCED PRINT FIXES */
               @media print {
-                @page { size: landscape; margin: 10mm; }
+                @page
                 * {
                   -webkit-print-color-adjust: exact !important;
                   color-adjust: exact !important;
@@ -20969,9 +21198,9 @@ function deleteDocPreset() {
             <label style="display:flex; flex-direction:column; min-width:130px; background:white; border:1px solid ${isOutOfStock ? '#f8d7da' : '#c3e6cb'}; padding:8px; border-radius:6px; cursor:${isOutOfStock ? 'not-allowed' : 'pointer'}; opacity:${isOutOfStock ? '0.6' : '1'}; flex-shrink:0;">
                 <div style="display:flex; align-items:center; gap:5px;">
                     <input type="checkbox" value="${p.id}" onchange="toggleProvidedItem('${p.id}', this.checked)" ${isOutOfStock ? 'disabled' : ''} style="width:16px; height:16px;">
-                    <span style="font-weight:bold; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${p.item}">${p.item}</span>
+                    <span style="font-weight:bold; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${p.item} (${p.subCategory})">${p.item} (${p.subCategory})</span>
                 </div>
-                <div style="font-size:0.75rem; color:#666; margin-top:4px;">Stock: <span style="color:${isOutOfStock?'#dc3545':'#28a745'}; font-weight:bold;">${qty}</span></div>
+                <div style="font-size:0.75rem; color:#555; margin-top:4px;">₹${invItem ? invItem.price : 0} <span style="color:${isOutOfStock?'#dc3545':'#28a745'}; font-weight:bold;">(${qty})</span></div>
             </label>
             `;
         }).join('');
@@ -21020,7 +21249,7 @@ function deleteDocPreset() {
         <label style="display:flex; flex-direction:column; min-width:130px; background:white; border:1px solid #f5c6cb; padding:8px; border-radius:6px; cursor:pointer; flex-shrink:0;">
           <div style="display:flex; align-items:center; gap:5px;">
             <input type="checkbox" value="${p.id}" onchange="toggleRefundItem('${p.id}', this.checked, ${p.price})" style="width:16px; height:16px;">
-            <span style="font-weight:bold; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${p.item}">${p.item}</span>
+            <span style="font-weight:bold; font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${p.item} (${p.subCategory})">${p.item} (${p.subCategory})</span>
           </div>
           <div style="font-size:0.75rem; color:#dc3545; margin-top:4px; font-weight:bold;">₹${p.price}</div>
         </label>
@@ -21161,6 +21390,10 @@ function generateInvByItems() {
                 totalProfit    += (item.totalSales || 0) - ((item.price || 0) * (item.salesUnits || 0));
             });
             const fmtN = v => '₹' + v.toLocaleString('en-IN',{minimumFractionDigits:2});
+            // ===== NAYA: Data globally save karo Order List ke liye =====
+            window._invItemsReportData = data.data;
+            window._invItemsReportMeta = { cat: cat, subCat: subCat };
+
             let html = `
                 <div style="position: relative;">
                     <button class="modern-download-btn no-print" title="Download as Excel" onclick="downloadReportToExcel(this.parentElement, 'InventoryItems')">
@@ -21171,7 +21404,9 @@ function generateInvByItems() {
                     </button>
                 <div class="report-summary">
                   <h3 style="text-align:center; margin:10px 0; color:#17a2b8;">INVENTORY ITEMS REPORT</h3>
-                  <p style="text-align:center; margin-bottom:15px; font-size:1rem; color:#555;">CATEGORY: ${cat} | SUB-CATEGORY: ${subCat}</p>
+                  <p style="text-align:center; margin-bottom:15px; font-size:1rem; color:#555;">CATEGORY: ${cat} | SUB-CATEGORY: ${subCat}
+                    <span title="Print Low Stock Order List" class="no-print" style="cursor:pointer; margin-left:8px; color:#b30000; font-size:1.05rem; vertical-align:middle;" onclick="printItemsOrderList()"><i class="bi bi-cart-fill"></i></span>
+                  </p>
                 </div>
                 <div class="report-grid">
                     <div class="report-item total">
@@ -21200,6 +21435,8 @@ function generateInvByItems() {
                                 <th>Item Name</th>
                                 <th>MRP (₹)</th>
                                 <th>Stock Qty</th>
+                                <th style="color:#e67e22;">Min. Qty</th>
+                                <th style="color:#b30000;">Order Qty</th>
                                 <th style="color:#764ba2;">Stock Value (₹)</th>
                                 <th style="color:#28a745;">Sales Units</th>
                                 <th style="color:#e74c3c;">Total Sales (₹)</th>
@@ -21209,7 +21446,7 @@ function generateInvByItems() {
             `;
  
             if (data.data.length === 0) {
-                html += `<tr><td colspan="8" style="text-align:center; color:#dc3545; font-weight:600;">No Items Found</td></tr>`;
+                html += `<tr><td colspan="10" style="text-align:center; color:#dc3545; font-weight:600;">No Items Found</td></tr>`;
             } else {
                 data.data.forEach(item => {
                     html += `
@@ -21219,6 +21456,8 @@ function generateInvByItems() {
                             <td style="font-weight:bold;">${item.item}</td>
                             <td style="color:#28a745; font-weight:bold;">₹${item.price}</td>
                             <td style="font-weight:bold; color:${item.qty <= 0 ? '#dc3545' : '#333'}">${item.qty}</td>
+                            <td style="color:#e67e22; font-weight:bold;">${item.minQty || 0}</td>
+                            <td style="font-weight:bold; color:${(item.minQty||0) > (item.qty||0) ? '#b30000' : '#28a745'};">${Math.max(0,(item.minQty||0)-(item.qty||0)) || '—'}</td>
                             <td style="color:#764ba2; font-weight:bold;">₹${(item.stockValue||0).toLocaleString('en-IN',{minimumFractionDigits:2})}</td>
                             <td style="color:#28a745; font-weight:bold;">${item.salesUnits||0}</td>
                             <td style="color:#e74c3c; font-weight:bold;">₹${(item.totalSales||0).toLocaleString('en-IN',{minimumFractionDigits:2})}</td>
@@ -21248,6 +21487,10 @@ function generateInvByStudents() {
             const data = JSON.parse(res);
             if(!data.success) return showMessage(data.message, 'error');
 
+            // Pending-Items Print feature ke liye data ko globally save kar lo
+            window._invStudentReportData = data;
+            window._invStudentReportMeta = { cls: cls, cat: cat };
+
             let html = `
                 <div style="position: relative;">
                     <button class="modern-download-btn no-print" title="Download as Excel" onclick="downloadReportToExcel(this.parentElement, 'InventoryStudents')">
@@ -21257,8 +21500,11 @@ function generateInvByStudents() {
                         <i class="bi bi-printer-fill"></i>
                     </button>
                 <div class="report-summary">
-                  <h3 style="text-align:center; margin:10px 0; color:#28a745;">STUDENT INVENTORY ALLOTMENT</h3>
-                  <p style="text-align:center; margin-bottom:15px; font-size:1rem; color:#555;">CLASS: ${cls} | CATEGORY: ${cat}</p>
+                  <h3 style="text-align:center; margin:10px 0; color:#28a745;">INVENTORY ALLOTMENT</h3>
+                  <p style="text-align:center; margin-bottom:8px; font-size:1rem; color:#555;">
+                    CLASS: ${cls} | CATEGORY: ${cat}
+                    <span title="Print Pending Items" class="no-print" style="cursor:pointer; margin-left:8px; color:#b30000; font-size:1.05rem; vertical-align:middle;" onclick="printPendingInventoryItems()"><i class="bi bi-card-checklist"></i></span>
+                  </p>
                 </div>
                 <div class="table-responsive">
                     <table class="report-table">
@@ -21291,21 +21537,37 @@ function generateInvByStudents() {
                                 <small style="color: #667eea; font-weight: 500;">Class: ${s.class}</small>
                             </td>
                     `;
-
                     // Populate status for each item
                     data.items.forEach(item => {
-                        let status = s.statuses[item];
-                        let badgeHtml = '<span style="color:#999; font-size:0.85rem; font-style:italic;">Not Alloted</span>';
-                        
-                        if (status === 'Provided') {
-                            badgeHtml = '<span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:15px; font-size:0.85rem; font-weight:bold;"><i class="bi bi-check-circle-fill"></i> Provided</span>';
-                        } else if (status === 'Pending') {
-                            badgeHtml = '<span style="background:#f8d7da; color:#721c24; padding:4px 10px; border-radius:15px; font-size:0.85rem; font-weight:bold;"><i class="bi bi-clock-history"></i> Pending</span>';
+                        let entries = s.statuses[item]; // Ab array hai: [{subCategory, status, available}, ...]
+                        let badgeHtml = '<span style="color:#aaa; font-size:0.82rem; font-style:italic;">Not Alloted</span>';
+
+                        if (entries && entries.length > 0) {
+                            badgeHtml = entries.map(e => {
+                                if (e.status === 'Provided') {
+                                    // GREEN: Item student ko de diya gaya hai
+                                    return `<div style="padding:3px 0; white-space:nowrap;">
+                                        <i class="bi bi-check-circle-fill" style="color:#28a745;"></i>
+                                        <span style="color:#28a745; font-size:0.82rem; font-weight:700;">${item} (${e.subCategory})</span>
+                                    </div>`;
+                                } else if (e.available) {
+                                    // YELLOW: Stock me available hai, par student ko abhi diya nahi gaya
+                                    return `<div style="padding:3px 0; white-space:nowrap;">
+                                        <i class="bi bi-hourglass-split" style="color:#b8860b;"></i>
+                                        <span style="color:#b8860b; font-size:0.82rem; font-weight:700;">${item} (${e.subCategory})</span>
+                                    </div>`;
+                                } else {
+                                    // RED: Na student ko mila hai, na stock me available hai
+                                    return `<div style="padding:3px 0; white-space:nowrap;">
+                                        <i class="bi bi-clock-history" style="color:#dc3545;"></i>
+                                        <span style="color:#dc3545; font-size:0.82rem; font-weight:700;">${item} (${e.subCategory})</span>
+                                    </div>`;
+                                }
+                            }).join('');
                         }
 
                         html += `<td style="text-align:center; vertical-align:middle;">${badgeHtml}</td>`;
                     });
-
                     html += `</tr>`;
                 });
             }
@@ -21317,6 +21579,402 @@ function generateInvByStudents() {
         .getInvStudentsReport(cls, cat);
 }
 
+// ==================== PRINT PENDING ITEMS ORDER SHEET (LEDGER-STYLE) ====================
+function printPendingInventoryItems() {
+    const data = window._invStudentReportData;
+    const meta = window._invStudentReportMeta;
+    if (!data || !meta) return showMessage('Please Generate The Report First.', 'error');
+    showSpinner(true);
+    google.script.run
+      .withSuccessHandler(settings => {
+        showSpinner(false);
+        window.schoolNameForPrint    = settings.name    || 'MY ORGANISATION';
+        window.schoolAddressForPrint = settings.address || '';
+        window.schoolPhoneForPrint   = settings.phone   || '';
+        buildPendingInventoryItemsPrint(data, meta);
+      })
+      .withFailureHandler(err => {
+        showSpinner(false);
+        buildPendingInventoryItemsPrint(data, meta); // Fetch Fail Hua Toh Jo Pehle Se Cached/Default Hai Wahi Chalega
+      })
+      .getSchoolDetailsFromA3();
+}
+
+function buildPendingInventoryItemsPrint(data, meta) {
+    const priceMap  = data.priceMap  || {};
+    const itemOrder = data.itemOrder || []; // INVENTARY Sheet ka original row-order (key: subCategory||item)
+    const aggMap = {}; // key: subCategory||item -> pending qty count (Out-Of-Stock only)
+    data.students.forEach(s => {
+        data.items.forEach(item => {
+            const entries = s.statuses[item];
+            if (!entries || entries.length === 0) return;
+            entries.forEach(e => {
+                if (e.status !== 'Pending') return; // Provided skip
+                if (e.available) return;            // YELLOW (in-stock) skip — order me nahi chahiye
+                const key = e.subCategory + '||' + item;
+                aggMap[key] = (aggMap[key] || 0) + 1;
+            });
+        });
+    });
+
+    // INVENTARY Sheet me jo order hai (upar se niche), usi sequence me rows banayein.
+    // Agar koi key itemOrder me na mile (fallback), use list ke end me jod do.
+    const orderedKeys = itemOrder.filter(k => aggMap.hasOwnProperty(k));
+    Object.keys(aggMap).forEach(k => { if (!orderedKeys.includes(k)) orderedKeys.push(k); });
+
+    let orderRows = orderedKeys.map(key => {
+        const sepIdx      = key.indexOf('||');
+        const subCategory = key.substring(0, sepIdx);
+        const item        = key.substring(sepIdx + 2);
+        const qty         = aggMap[key];
+        const price        = Number(priceMap[key]) || 0;
+        return { category: meta.cat, subCategory: subCategory, item: item, qty: qty, price: price, total: qty * price };
+    });
+
+    if (orderRows.length === 0) {
+        return showMessage('No Out-Of-Stock Pending Items Found For This Selection.', 'info');
+    }
+
+    const totalQty    = orderRows.reduce((sum, r) => sum + r.qty, 0);
+    const totalAmount = orderRows.reduce((sum, r) => sum + r.total, 0);
+
+    const logoUrl  = (typeof SCHOOL_LOGO_URL !== 'undefined') ? SCHOOL_LOGO_URL : '';
+    const sName    = window.schoolNameForPrint    || 'MY ORGANISATION';
+    const sAdd     = window.schoolAddressForPrint || '';
+    const sPhone   = window.schoolPhoneForPrint   || '';
+    const addrLine = (sAdd || sPhone) ? `${sAdd}${sAdd && sPhone ? ' | ' : ''}${sPhone ? 'Ph: ' + sPhone : ''}` : '';
+
+    let bodyRows = '';
+    orderRows.forEach((r, idx) => {
+        bodyRows += `<tr>
+            <td>${idx + 1}</td>
+            <td><span style="background:#e8f4fd; color:#0072ff; padding:3px 8px; border-radius:5px; font-size:0.82rem; font-weight:bold;">${r.category}</span></td>
+            <td>${r.subCategory}</td>
+            <td style="text-align:left; font-weight:bold;">${r.item}</td>
+            <td style="font-weight:bold; color:#b30000;">${r.qty}</td>
+            <td>&#8377;${r.price.toLocaleString('en-IN')}</td>
+            <td style="font-weight:bold; color:#28a745;">&#8377;${r.total.toLocaleString('en-IN')}</td>
+        </tr>`;
+    });
+
+    const html = `<html>
+<head>
+  <title>Pending Items Order Sheet - ${meta.cat}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background: #e0e0e0; }
+    @page { size: A4 portrait; margin: 0; }
+    .page { background: #fff; width: 190mm; min-height: 277mm; margin: 0 auto; padding: 12mm 15mm 15mm; box-sizing: border-box; page-break-after: always; position: relative; border: 2px solid #333; }
+    .header { display: flex; align-items: center; border-bottom: 3px solid #b30000; padding-bottom: 10px; margin-bottom: 13px; }
+    .logo { width: 80px; height: 80px; margin-right: 18px; object-fit: contain; }
+    .school-info { text-align: center; flex: 1; }
+    .school-name { margin: 0; font-size: 24px; color: #b30000; text-transform: uppercase; font-weight: bold; }
+    .school-address { margin: 3px 0 0 0; font-size: 12px; color: #444; font-weight: 600; }
+    .report-title { background: #b30000; color: #fff; padding: 5px 16px; font-size: 15px; font-weight: bold; border-radius: 4px; text-transform: uppercase; display: inline-block; margin-bottom: 13px; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; margin-bottom: 13px; }
+    .info-cell { padding: 9px 13px; border-right: 1px solid #e0e0e0; }
+    .info-cell:last-child { border-right: none; }
+    .info-label { font-size: 9.5px; color: #888; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; }
+    .info-value { font-size: 12.5px; color: #111; font-weight: 700; }
+    .summary-row { display: flex; gap: 8px; margin-bottom: 14px; }
+    .s-box { flex: 1; border: 1.5px solid #e8e8e8; border-radius: 6px; padding: 8px 10px; text-align: center; background: #fafafa; }
+    .s-val { font-size: 15px; font-weight: 700; }
+    .s-lbl { font-size: 9.5px; color: #777; text-transform: uppercase; font-weight: 600; margin-top: 3px; }
+    .ledger-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 12px; margin-bottom: 16px; }
+    .ledger-table th, .ledger-table td { border: 1px solid #333; padding: 7px 8px; }
+    .ledger-table th { background: #f0f0f0; font-weight: 700; text-transform: uppercase; font-size: 10.5px; }
+    .ledger-table td { color: #222; }
+    .ledger-table tfoot td { border-top: 2px solid #333; font-size: 12.5px; }
+    .signatures { display: flex; justify-content: space-between; font-size: 12px; font-weight: bold; text-align: center; margin-top: 40px; }
+    .sig-box { border-top: 1px dashed #000; width: 28%; padding-top: 6px; color: #444; }
+    .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70%; opacity: 0.07; z-index: 0; pointer-events: none; }
+    .content { position: relative; z-index: 1; }
+    @media print {
+      body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { border: none; margin: 0; padding: 10mm 15mm; width: 100%; box-shadow: none; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <img class="watermark" src="${logoUrl}" alt="">
+    <div class="content">
+      <!-- HEADER -->
+      <div class="header">
+        <img class="logo" src="${logoUrl}" alt="Logo" onerror="this.style.display='none'">
+        <div class="school-info">
+          <h2 class="school-name">${sName}</h2>
+          ${addrLine ? `<p class="school-address">${addrLine}</p>` : ''}
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <div class="report-title">PENDING ITEMS ORDER SHEET</div>
+      </div>
+      <!-- INFO GRID -->
+      <div class="info-grid">
+        <div class="info-cell">
+          <div class="info-label">Class</div>
+          <div class="info-value">${meta.cls}</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-label">Category</div>
+          <div class="info-value">${meta.cat.toUpperCase()}</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-label">Generated On</div>
+          <div class="info-value">${new Date().toLocaleDateString('en-IN')}</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-label">Distinct Items</div>
+          <div class="info-value">${orderRows.length}</div>
+        </div>
+      </div>
+      <!-- SUMMARY BOXES -->
+      <div class="summary-row">
+        <div class="s-box">
+          <div class="s-val" style="color:#b30000;">${orderRows.length}</div>
+          <div class="s-lbl">Distinct Items</div>
+        </div>
+        <div class="s-box">
+          <div class="s-val" style="color:#8e44ad;">${totalQty}</div>
+          <div class="s-lbl">Total Order Qty</div>
+        </div>
+        <div class="s-box">
+          <div class="s-val" style="color:#28a745;">&#8377;${totalAmount.toLocaleString('en-IN')}</div>
+          <div class="s-lbl">Total Order Value</div>
+        </div>
+      </div>
+      <!-- ITEM-WISE ORDER TABLE -->
+      <table class="ledger-table">
+        <thead>
+          <tr>
+            <th width="5%">#</th>
+            <th width="15%">Category</th>
+            <th width="17%">Sub-Category</th>
+            <th width="28%">Item Name</th>
+            <th width="12%">Order Qty</th>
+            <th width="11%">Price (&#8377;)</th>
+            <th width="12%">Total Price (&#8377;)</th>
+          </tr>
+        </thead>
+        <tbody>${bodyRows}</tbody>
+        <tfoot>
+          <tr style="background:#fff3cd;">
+            <td colspan="4" style="text-align:right; font-weight:bold;">GRAND TOTAL</td>
+            <td style="font-weight:bold; color:#b30000;">${totalQty}</td>
+            <td></td>
+            <td style="font-weight:bold; color:#28a745;">&#8377;${totalAmount.toLocaleString('en-IN')}</td>
+          </tr>
+        </tfoot>
+      </table>
+      <!-- SIGNATURES -->
+      <div class="signatures">
+        <div class="sig-box">Store Keeper</div>
+        <div class="sig-box">Class Teacher</div>
+        <div class="sig-box">Principal</div>
+      </div>
+    </div>
+  </div>
+  <div class="no-print" style="text-align:center; margin:18px 0;">
+    <button onclick="window.print()" style="background:#b30000; color:#fff; border:none; border-radius:6px; padding:10px 34px; font-size:14px; font-weight:700; cursor:pointer; font-family:'Poppins',sans-serif; letter-spacing:0.3px;">
+      &#128424; Print / Save PDF
+    </button>
+  </div>
+</body>
+</html>`;
+    openPrintWindow(html, 'view');
+}
+// ==================== PRINT LOW STOCK ORDER LIST (REPORT BY ITEMS) ====================
+function printItemsOrderList() {
+    const data = window._invItemsReportData;
+    const meta = window._invItemsReportMeta;
+    if (!data || !meta) return showMessage('Please Generate The Report First.', 'error');
+
+    showSpinner(true);
+    google.script.run
+      .withSuccessHandler(settings => {
+        showSpinner(false);
+        window.schoolNameForPrint    = settings.name    || 'MY ORGANISATION';
+        window.schoolAddressForPrint = settings.address || '';
+        window.schoolPhoneForPrint   = settings.phone   || '';
+        buildLowStockOrderListPrint(data, meta);
+      })
+      .withFailureHandler(err => {
+        showSpinner(false);
+        buildLowStockOrderListPrint(data, meta); // Fetch Fail Hua Toh Jo Pehle Se Cached/Default Hai Wahi Chalega
+      })
+      .getSchoolDetailsFromA3();
+}
+
+function buildLowStockOrderListPrint(data, meta) {
+    // Items filter karo jahan Stock Qty < Min. Qty
+    const lowStock = data
+        .filter(item => (item.minQty || 0) > 0 && (item.qty || 0) < (item.minQty || 0))
+        .map(item => ({
+            category:   item.category,
+            subCategory: item.subCategory,
+            item:       item.item,
+            currentQty: item.qty   || 0,
+            minQty:     item.minQty || 0,
+            orderQty:   (item.minQty || 0) - (item.qty || 0),
+            price:      item.price  || 0,
+            total:      ((item.minQty || 0) - (item.qty || 0)) * (item.price || 0)
+        }));
+
+    if (lowStock.length === 0)
+        return showMessage('All Items Have Sufficient Stock. No Order Required.', 'info');
+
+    const totalQty    = lowStock.reduce((s, r) => s + r.orderQty, 0);
+    const totalAmount = lowStock.reduce((s, r) => s + r.total,    0);
+
+    const logoUrl  = (typeof SCHOOL_LOGO_URL !== 'undefined') ? SCHOOL_LOGO_URL : '';
+    const sName    = window.schoolNameForPrint    || 'MY ORGANISATION';
+    const sAdd     = window.schoolAddressForPrint || '';
+    const sPhone   = window.schoolPhoneForPrint   || '';
+    const addrLine = (sAdd || sPhone) ? `${sAdd}${sAdd && sPhone ? ' | ' : ''}${sPhone ? 'Ph: ' + sPhone : ''}` : '';
+
+    let bodyRows = '';
+    lowStock.forEach((r, idx) => {
+        const rowBg = idx % 2 === 0 ? '#fff' : '#fafafa';
+        bodyRows += `<tr style="background:${rowBg};">
+            <td>${idx + 1}</td>
+            <td><span style="background:#e8f4fd; color:#0072ff; padding:3px 8px; border-radius:5px; font-size:0.82rem; font-weight:bold;">${r.category}</span></td>
+            <td>${r.subCategory}</td>
+            <td style="text-align:left; font-weight:bold;">${r.item}</td>
+            <td style="color:#28a745; font-weight:bold;">${r.currentQty}</td>
+            <td style="color:#e67e22; font-weight:bold;">${r.minQty}</td>
+            <td style="font-weight:bold; color:#b30000;">${r.orderQty}</td>
+            <td>&#8377;${r.price.toLocaleString('en-IN')}</td>
+            <td style="font-weight:bold; color:#28a745;">&#8377;${r.total.toLocaleString('en-IN')}</td>
+        </tr>`;
+    });
+
+    const html = `<html>
+<head>
+  <title>Low Stock Order List - ${meta.cat}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background: #e0e0e0; }
+    @page { size: A4 portrait; margin: 0; }
+    .page { background: #fff; width: 190mm; min-height: 277mm; margin: 0 auto; padding: 12mm 15mm 15mm; box-sizing: border-box; position: relative; border: 2px solid #333; }
+    .header { display: flex; align-items: center; border-bottom: 3px solid #b30000; padding-bottom: 10px; margin-bottom: 13px; }
+    .logo { width: 80px; height: 80px; margin-right: 18px; object-fit: contain; }
+    .school-info { text-align: center; flex: 1; }
+    .school-name { margin: 0; font-size: 24px; color: #b30000; text-transform: uppercase; font-weight: bold; }
+    .school-address { margin: 3px 0 0 0; font-size: 12px; color: #444; font-weight: 600; }
+    .report-title { background: #b30000; color: #fff; padding: 5px 16px; font-size: 15px; font-weight: bold; border-radius: 4px; text-transform: uppercase; display: inline-block; margin-bottom: 13px; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; margin-bottom: 13px; }
+    .info-cell { padding: 9px 13px; border-right: 1px solid #e0e0e0; }
+    .info-cell:last-child { border-right: none; }
+    .info-label { font-size: 9.5px; color: #888; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; }
+    .info-value { font-size: 12.5px; color: #111; font-weight: 700; }
+    .summary-row { display: flex; gap: 8px; margin-bottom: 14px; }
+    .s-box { flex: 1; border: 1.5px solid #e8e8e8; border-radius: 6px; padding: 8px 10px; text-align: center; background: #fafafa; }
+    .s-val { font-size: 15px; font-weight: 700; }
+    .s-lbl { font-size: 9.5px; color: #777; text-transform: uppercase; font-weight: 600; margin-top: 3px; }
+    .ledger-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 11px; margin-bottom: 16px; }
+    .ledger-table th, .ledger-table td { border: 1px solid #333; padding: 6px 7px; }
+    .ledger-table th { background: #f0f0f0; font-weight: 700; text-transform: uppercase; font-size: 9.5px; }
+    .ledger-table td { color: #222; }
+    .ledger-table tfoot td { border-top: 2px solid #333; font-size: 12px; }
+    .signatures { display: flex; justify-content: space-between; font-size: 12px; font-weight: bold; text-align: center; margin-top: 40px; }
+    .sig-box { border-top: 1px dashed #000; width: 28%; padding-top: 6px; color: #444; }
+    .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70%; opacity: 0.07; z-index: 0; pointer-events: none; }
+    .content { position: relative; z-index: 1; }
+    @media print {
+      body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { border: none; margin: 0; padding: 10mm 15mm; width: 100%; box-shadow: none; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <img class="watermark" src="${logoUrl}" alt="">
+    <div class="content">
+      <div class="header">
+        <img class="logo" src="${logoUrl}" alt="Logo" onerror="this.style.display='none'">
+        <div class="school-info">
+          <h2 class="school-name">${sName}</h2>
+          ${addrLine ? `<p class="school-address">${addrLine}</p>` : ''}
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <div class="report-title">LOW STOCK ORDER LIST</div>
+      </div>
+      <div class="info-grid">
+        <div class="info-cell">
+          <div class="info-label">Category</div>
+          <div class="info-value">${meta.cat.toUpperCase()}</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-label">Sub-Category</div>
+          <div class="info-value">${meta.subCat.toUpperCase()}</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-label">Generated On</div>
+          <div class="info-value">${new Date().toLocaleDateString('en-IN')}</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-label">Low Stock Items</div>
+          <div class="info-value">${lowStock.length}</div>
+        </div>
+      </div>
+      <div class="summary-row">
+        <div class="s-box">
+          <div class="s-val" style="color:#b30000;">${lowStock.length}</div>
+          <div class="s-lbl">Low Stock Items</div>
+        </div>
+        <div class="s-box">
+          <div class="s-val" style="color:#8e44ad;">${totalQty}</div>
+          <div class="s-lbl">Total Order Qty</div>
+        </div>
+        <div class="s-box">
+          <div class="s-val" style="color:#28a745;">&#8377;${totalAmount.toLocaleString('en-IN')}</div>
+          <div class="s-lbl">Total Order Value</div>
+        </div>
+      </div>
+      <table class="ledger-table">
+        <thead>
+          <tr>
+            <th width="4%">#</th>
+            <th width="13%">Category</th>
+            <th width="14%">Sub-Category</th>
+            <th width="22%">Item Name</th>
+            <th width="9%">Stock Qty</th>
+            <th width="9%">Min. Qty</th>
+            <th width="9%">Order Qty</th>
+            <th width="10%">Price (&#8377;)</th>
+            <th width="10%">Total (&#8377;)</th>
+          </tr>
+        </thead>
+        <tbody>${bodyRows}</tbody>
+        <tfoot>
+          <tr style="background:#fff3cd;">
+            <td colspan="6" style="text-align:right; font-weight:bold;">GRAND TOTAL</td>
+            <td style="font-weight:bold; color:#b30000;">${totalQty}</td>
+            <td></td>
+            <td style="font-weight:bold; color:#28a745;">&#8377;${totalAmount.toLocaleString('en-IN')}</td>
+          </tr>
+        </tfoot>
+      </table>
+      <div class="signatures">
+        <div class="sig-box">Store Keeper</div>
+        <div class="sig-box">Accountant</div>
+        <div class="sig-box">Principal</div>
+      </div>
+    </div>
+  </div>
+  <div class="no-print" style="text-align:center; margin:18px 0;">
+    <button onclick="window.print()" style="background:#b30000; color:#fff; border:none; border-radius:6px; padding:10px 34px; font-size:14px; font-weight:700; cursor:pointer; font-family:'Poppins',sans-serif;">
+      &#128424; Print / Save PDF
+    </button>
+  </div>
+</body>
+</html>`;
+    openPrintWindow(html, 'view');
+}
 function fetchAdminInventory() {
   showSpinner(true);
   google.script.run
@@ -21403,9 +22061,15 @@ function renderAdminInventory(items) {
               <label style="font-size: 0.75rem; color: #666;">Category</label>
               <input type="text" class="text-input inv-cat" value="${item.category}" placeholder="Category" style="padding: 6px;">
             </div>
-            <div style="flex: 1; min-width: 120px;">
-              <label style="font-size: 0.75rem; color: #666;">Sub-Cat</label>
-              <input type="text" class="text-input inv-subcat" value="${item.subCategory}" placeholder="Sub-Category" style="padding: 6px;">
+            <div style="display:flex; gap:8px; flex:1.7; min-width:200px;">
+              <div style="flex:1; min-width:100px;">
+                <label style="font-size: 0.75rem; color: #666;">Sub-Cat</label>
+                <input type="text" class="text-input inv-subcat" value="${item.subCategory}" placeholder="Sub-Category" style="padding: 6px;">
+              </div>
+              <div style="flex:0.6; min-width:65px;">
+                <label style="font-size: 0.75rem; color: #e67e22; font-weight:600;">Min.Qty</label>
+                <input type="number" class="text-input inv-minqty" value="${item.minQty || 0}" placeholder="0" min="0" style="padding: 6px;">
+              </div>
             </div>
             <div style="flex: 1.5; min-width: 150px;">
               <label style="font-size: 0.75rem; color: #666;">Item Name</label>
@@ -21456,6 +22120,7 @@ function toggleInvExpAccordion(bodyId) {
 function openAddItemModal() {
   document.getElementById('newItemCat').value = '';
   document.getElementById('newItemSubCat').value = '';
+  document.getElementById('newItemMinQty').value = '';   // ← NAYA
   document.getElementById('newItemName').value = '';
   document.getElementById('newItemOPrice').value = '';
   document.getElementById('newItemSPrice').value = '';
@@ -21464,12 +22129,13 @@ function openAddItemModal() {
 }
 
 function saveNewInventoryItem() {
-  const cat = document.getElementById('newItemCat').value.trim();
+  const cat    = document.getElementById('newItemCat').value.trim();
   const subCat = document.getElementById('newItemSubCat').value.trim();
-  const name = document.getElementById('newItemName').value.trim();
+  const minQty = document.getElementById('newItemMinQty').value || '0';  // ← NAYA
+  const name   = document.getElementById('newItemName').value.trim();
   const oPrice = document.getElementById('newItemOPrice').value;
   const sPrice = document.getElementById('newItemSPrice').value;
-  const qty = document.getElementById('newItemQty').value;
+  const qty    = document.getElementById('newItemQty').value;
 
   if (!cat || !name) return showMessage('Category And Item Name Are Required!', 'error');
 
@@ -21482,7 +22148,7 @@ function saveNewInventoryItem() {
         playSound('success');
         showMessage('Item Added Successfully', 'success');
         document.getElementById('addItemModal').style.display = 'none';
-        fetchAdminInventory(); // Refresh list
+        fetchAdminInventory();
       } else {
         showMessage(data.message, 'error');
       }
@@ -21491,17 +22157,18 @@ function saveNewInventoryItem() {
       showSpinner(false);
       showMessage('Error: ' + err, 'error');
     })
-    .adminAddInventoryItem(cat, subCat, name, oPrice, sPrice, qty);
+    .adminAddInventoryItem(cat, subCat, name, oPrice, sPrice, qty, minQty);  // ← minQty add hua
 }
 
 function updateSingleItem(btn, rowNum) {
   const rowDiv = btn.closest('.inv-edit-row');
-  const cat = rowDiv.querySelector('.inv-cat').value;
+  const cat    = rowDiv.querySelector('.inv-cat').value;
   const subCat = rowDiv.querySelector('.inv-subcat').value;
-  const name = rowDiv.querySelector('.inv-name').value;
+  const minQty = rowDiv.querySelector('.inv-minqty').value || '0';   // ← NAYA
+  const name   = rowDiv.querySelector('.inv-name').value;
   const oPrice = rowDiv.querySelector('.inv-oprice').value;
   const sPrice = rowDiv.querySelector('.inv-sprice').value;
-  const qty = rowDiv.querySelector('.inv-qty').value;
+  const qty    = rowDiv.querySelector('.inv-qty').value;
 
   showSpinner(true);
   google.script.run
@@ -21519,7 +22186,7 @@ function updateSingleItem(btn, rowNum) {
       showSpinner(false);
       showMessage('Error: ' + err, 'error');
     })
-    .adminUpdateInventoryItem(rowNum, cat, subCat, name, oPrice, sPrice, qty);
+    .adminUpdateInventoryItem(rowNum, cat, subCat, name, oPrice, sPrice, qty, minQty);  // ← minQty add hua
 }
 
 function deleteInventoryItem(rowNum) {
@@ -21550,13 +22217,14 @@ function saveBulkInventory() {
   
   rows.forEach(row => {
     edits.push({
-      row: row.getAttribute('data-row'),
-      cat: row.querySelector('.inv-cat').value,
+      row:    row.getAttribute('data-row'),
+      cat:    row.querySelector('.inv-cat').value,
       subCat: row.querySelector('.inv-subcat').value,
-      name: row.querySelector('.inv-name').value,
+      minQty: row.querySelector('.inv-minqty') ? row.querySelector('.inv-minqty').value || '0' : '0',  // ← NAYA
+      name:   row.querySelector('.inv-name').value,
       oPrice: row.querySelector('.inv-oprice').value,
       sPrice: row.querySelector('.inv-sprice').value,
-      qty: row.querySelector('.inv-qty').value
+      qty:    row.querySelector('.inv-qty').value
     });
   });
 
@@ -21675,7 +22343,7 @@ function renderAdminExpenses(items) {
             </div>
             <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; background: white; padding: 10px; border-radius: 5px; border: 1px dashed #dc3545;">
               <div style="flex: 1; min-width: 100px;"><label style="font-size: 0.7rem; color: #555;">Fixed Expense</label><input type="text" class="text-input exp-fixed" value="${item.fixedExp}"></div>
-              <div style="flex: 1; min-width: 100px;"><label style="font-size: 0.7rem; color: #555;">Other Expense</label><input type="text" class="text-input exp-othercol" value="${item.otherExp}"></div>
+              <div style="flex: 1; min-width: 100px;"><label style="font-size: 0.7rem; color: #555;">Entry Date</label><input type="date" class="text-input exp-date" value="${new Date().toISOString().slice(0,10)}"></div>
               <div style="flex: 1; min-width: 120px; background: #e2ffeb; padding: 5px; border-radius: 5px;">
                 <label style="font-size: 0.7rem; color: #28a745; font-weight:bold;">+ Add New Exp Amt</label>
                 <input type="number" class="text-input exp-add-new" placeholder="Amount" style="border-color:#28a745;">
@@ -21743,7 +22411,7 @@ function updateSingleExpense(btn, rowNum) {
     type: rowDiv.querySelector('.exp-type').value,
     payType: rowDiv.querySelector('.exp-paytype').value,
     fixed: rowDiv.querySelector('.exp-fixed').value,
-    otherCol: rowDiv.querySelector('.exp-othercol').value,
+    entryDate: rowDiv.querySelector('.exp-date').value,
     addAmt: rowDiv.querySelector('.exp-add-new').value,
     addOtherAmt: rowDiv.querySelector('.exp-add-other').value
   };
@@ -21770,7 +22438,6 @@ function saveBulkExpense() {
       type: row.querySelector('.exp-type').value,
       payType: row.querySelector('.exp-paytype').value,
       fixed: row.querySelector('.exp-fixed').value,
-      otherCol: row.querySelector('.exp-othercol').value
     });
   });
 
@@ -21874,7 +22541,10 @@ function renderExpenseReport(items) {
         <td><strong>${item.category}</strong></td>
         <td>${item.subCategory}</td>
         <td>${item.expType}</td>
-        <td style="text-align:right; font-weight:600; color:#c0392b;">${fmt(item.total)}</td>
+        <td style="text-align:right; font-weight:600; color:#c0392b;">
+          ${fmt(item.total)}
+          <span title="View Expense Ledger" style="cursor:pointer; margin-left:6px; color:#007bff; font-size:1rem; vertical-align:middle;" onclick='showExpenseLedger(${JSON.stringify(item)})'><i class="bi bi-clock-history"></i></span>
+        </td>
         <td style="text-align:right; color:#8e44ad;">${fmt(item.monthly)}</td>
         <td style="text-align:center;">${item.payType}</td>
         ${mCells}
@@ -21984,9 +22654,228 @@ function renderExpenseReport(items) {
       </div>
     </div>`;
 }
-// ==================== RAZORPAY PAYMENT INTEGRATION ====================
+// ==================== EXPENSE LEDGER (HISTORY) ====================
+function showExpenseLedger(item) {
+  // NAYA: Print Se Pehle School Details Fetch Karo (Priority: School Details -> ID Card -> MY ORGANISATION)
+  showSpinner(true);
+  google.script.run
+    .withSuccessHandler(settings => {
+      showSpinner(false);
+      window.schoolNameForPrint    = settings.name    || 'MY ORGANISATION';
+      window.schoolAddressForPrint = settings.address || '';
+      window.schoolPhoneForPrint   = settings.phone   || '';
+      buildExpenseLedgerPrint(item);
+    })
+    .withFailureHandler(err => {
+      showSpinner(false);
+      buildExpenseLedgerPrint(item); // Fetch Fail Hua Toh Jo Pehle Se Cached/Default Hai Wahi Chalega
+    })
+    .getSchoolDetailsFromA3();
+}
 
-// Step 1: "Pay Now" button click hone par — Modal open karo
+function buildExpenseLedgerPrint(item) {
+  const months  = ['APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC','JAN','FEB','MAR'];
+  const logoUrl = (typeof SCHOOL_LOGO_URL !== 'undefined') ? SCHOOL_LOGO_URL : '';
+  const sName   = (window.schoolNameForPrint) ? window.schoolNameForPrint : 'MY ORGANISATION';
+  const sAdd    = window.schoolAddressForPrint || '';
+  const sPhone  = window.schoolPhoneForPrint  || '';
+  const addrLine = (sAdd || sPhone) ? `${sAdd}${sAdd && sPhone ? ' | ' : ''}${sPhone ? 'Ph: ' + sPhone : ''}` : '';
+  // ── Month-wise sections ──
+  let monthSections = '';
+  let hasMonthData  = false;
+  months.forEach(function(m) {
+    const raw = item.monthRaw && item.monthRaw[m];
+    if (!raw) return;
+    let entries = [];
+    try { entries = JSON.parse(raw); } catch(e) { return; }
+    if (!Array.isArray(entries) || entries.length === 0) return;
+    hasMonthData = true;
+    let monthTotal = 0;
+    let entryRows  = '';
+    entries.forEach(function(e, idx) {
+      const amt = (parseFloat(e.expense) || 0) + (parseFloat(e.otherExpense) || 0);
+      monthTotal += amt;
+      entryRows += `<tr>
+        <td>${e.date || 'N/A'}</td>
+        <td style="text-align:left;">${e.category || item.category}</td>
+        <td style="text-align:left;">${e.expenseType || item.expType}</td>
+        <td style="color:#28a745; font-weight:bold;">&#8377;${amt.toLocaleString('en-IN')}</td>
+        <td><strong>&#8377;${amt.toLocaleString('en-IN')}</strong></td>
+      </tr>`;
+    });
+    monthSections += `
+      <div class="month-header">MONTH: ${m}
+        <span style="float:right; font-weight:normal; font-size:12px; color:#555;">
+          ${entries.length} entries &nbsp;|&nbsp; Total: &#8377;${monthTotal.toLocaleString('en-IN')}
+        </span>
+      </div>
+      <table class="ledger-table">
+        <thead>
+          <tr>
+            <th width="15%">Date</th>
+            <th width="30%">Category</th>
+            <th width="30%">Expense Type</th>
+            <th width="12%">Amount</th>
+            <th width="13%">Debit</th>
+          </tr>
+        </thead>
+        <tbody>${entryRows}</tbody>
+      </table>`;
+  });
+  if (!hasMonthData) {
+    monthSections = `<div style="text-align:center; padding:28px; color:#777; font-style:italic; border:1px dashed #ccc; background:#f9f9f9; margin-bottom:15px;">No Monthly Expense Entries Found.</div>`;
+  }
+  // ── Other Expense History (Col T) ──
+  let otherEntries = [];
+  if (item.otherRaw && item.otherRaw.includes('[')) {
+    const arrMatch = item.otherRaw.match(/\[[\s\S]*\]/);
+    if (arrMatch) { try { otherEntries = JSON.parse(arrMatch[0]); } catch(e) {} }
+  }
+  let otherRows = '';
+  if (otherEntries.length > 0) {
+    otherEntries.forEach(function(entry, idx) {
+      const amt = parseFloat(entry.amount || 0);
+      otherRows += `<tr>
+        <td>${entry.date || 'N/A'}</td>
+        <td colspan="2" style="text-align:left; color:#856404;">Other / Miscellaneous Expense</td>
+        <td style="color:#e67e22; font-weight:bold;">&#8377;${amt.toLocaleString('en-IN')}</td>
+        <td><strong>&#8377;${(item.other||0).toLocaleString('en-IN')}</strong></td>
+      </tr>`;
+    });
+  } else {
+    otherRows = `<tr><td colspan="5" style="text-align:center; color:#777; font-style:italic; padding:14px;">No Other Expense History Found.</td></tr>`;
+  }
+  const otherSection = `
+    <div class="month-header" style="background:#fff3cd; color:#856404; border-color:#ffeeba;">
+      INVENTORY ITEMS / OTHER EXPENSES
+      ${otherEntries.length > 0 ? `<span style="float:right; font-weight:normal; font-size:12px; color:#856404;">${otherEntries.length} entries &nbsp;|&nbsp; Total: &#8377;${(item.other||0).toLocaleString('en-IN')}</span>` : ''}
+    </div>
+    <table class="ledger-table" style="border-color:#ffeeba;">
+      <thead style="background:#ffeeba;">
+        <tr>
+          <th width="15%" style="border-color:#ffeeba;">Date</th>
+          <th width="30%" colspan="2" style="border-color:#ffeeba;">Description</th>
+          <th width="12%" style="border-color:#ffeeba;">Amount</th>
+          <th width="13%" style="border-color:#ffeeba;">Running Total</th>
+        </tr>
+      </thead>
+      <tbody>${otherRows}</tbody>
+    </table>`;
+  const html = `<html>
+<head>
+  <title>Expense Ledger - ${item.category}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background: #e0e0e0; }
+    @page { size: A4 portrait; margin: 0; }
+    .page { background: #fff; width: 190mm; min-height: 277mm; margin: 0 auto; padding: 12mm 15mm 15mm; box-sizing: border-box; page-break-after: always; position: relative; border: 2px solid #333; }
+    .header { display: flex; align-items: center; border-bottom: 3px solid #b30000; padding-bottom: 10px; margin-bottom: 13px; }
+    .logo { width: 80px; height: 80px; margin-right: 18px; object-fit: contain; }
+    .school-info { text-align: center; flex: 1; }
+    .school-name { margin: 0; font-size: 24px; color: #b30000; text-transform: uppercase; font-weight: bold; }
+    .school-address { margin: 3px 0 0 0; font-size: 12px; color: #444; font-weight: 600; }
+    .report-title { background: #b30000; color: #fff; padding: 5px 16px; font-size: 15px; font-weight: bold; border-radius: 4px; text-transform: uppercase; display: inline-block; margin-bottom: 13px; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; margin-bottom: 13px; }
+    .info-cell { padding: 9px 13px; border-right: 1px solid #e0e0e0; }
+    .info-cell:last-child { border-right: none; }
+    .info-label { font-size: 9.5px; color: #888; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; }
+    .info-value { font-size: 12.5px; color: #111; font-weight: 700; }
+    .summary-row { display: flex; gap: 8px; margin-bottom: 14px; }
+    .s-box { flex: 1; border: 1.5px solid #e8e8e8; border-radius: 6px; padding: 8px 10px; text-align: center; background: #fafafa; }
+    .s-val { font-size: 15px; font-weight: 700; }
+    .s-lbl { font-size: 9.5px; color: #777; text-transform: uppercase; font-weight: 600; margin-top: 3px; }
+    .ledger-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 12px; margin-bottom: 16px; }
+    .ledger-table th, .ledger-table td { border: 1px solid #333; padding: 7px 8px; }
+    .ledger-table th { background: #f0f0f0; font-weight: 700; text-transform: uppercase; font-size: 10.5px; }
+    .ledger-table td { color: #222; }
+    .month-header { text-align: left; background: #e9ecef; font-weight: bold; font-size: 13px; padding: 9px 11px; border: 1px solid #333; border-bottom: none; }
+    .signatures { display: flex; justify-content: space-between; font-size: 12px; font-weight: bold; text-align: center; margin-top: 40px; }
+    .sig-box { border-top: 1px dashed #000; width: 28%; padding-top: 6px; color: #444; }
+    .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70%; opacity: 0.07; z-index: 0; pointer-events: none; }
+    .content { position: relative; z-index: 1; }
+    @media print {
+      body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { border: none; margin: 0; padding: 10mm 15mm; width: 100%; box-shadow: none; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <img class="watermark" src="${logoUrl}" alt="">
+    <div class="content">
+      <!-- HEADER -->
+      <div class="header">
+        <img class="logo" src="${logoUrl}" alt="Logo" onerror="this.style.display='none'">
+        <div class="school-info">
+          <h2 class="school-name">${sName}</h2>
+          ${addrLine ? `<p class="school-address">${addrLine}</p>` : ''}
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <div class="report-title">EXPENSE LEDGER</div>
+      </div>
+      <!-- INFO GRID -->
+      <div class="info-grid">
+        <div class="info-cell">
+          <div class="info-label">Category</div>
+          <div class="info-value">${item.category.toUpperCase()}</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-label">Sub-Category</div>
+          <div class="info-value">${item.subCategory}</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-label">Expense Type</div>
+          <div class="info-value">${item.expType}</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-label">Payment Type</div>
+          <div class="info-value">${item.payType}</div>
+        </div>
+      </div>
+      <!-- SUMMARY BOXES -->
+      <div class="summary-row">
+        <div class="s-box">
+          <div class="s-val" style="color:#b30000;">&#8377;${(item.total||0).toLocaleString('en-IN')}</div>
+          <div class="s-lbl">Total (Yearly)</div>
+        </div>
+        <div class="s-box">
+          <div class="s-val" style="color:#8e44ad;">&#8377;${(item.monthly||0).toLocaleString('en-IN')}</div>
+          <div class="s-lbl">Monthly Exp</div>
+        </div>
+        <div class="s-box">
+          <div class="s-val" style="color:#e74c3c;">&#8377;${(item.fixed||0).toLocaleString('en-IN')}</div>
+          <div class="s-lbl">Fixed Exp</div>
+        </div>
+        <div class="s-box">
+          <div class="s-val" style="color:#e67e22;">&#8377;${(item.other||0).toLocaleString('en-IN')}</div>
+          <div class="s-lbl">Other Exp</div>
+        </div>
+      </div>
+      <!-- MONTH-WISE ENTRIES -->
+      ${monthSections}
+      <!-- OTHER EXPENSE HISTORY -->
+      ${otherSection}
+      <!-- SIGNATURES -->
+      <div class="signatures">
+        <div class="sig-box">Accountant</div>
+        <div class="sig-box">Manager</div>
+        <div class="sig-box">Principal</div>
+      </div>
+    </div>
+  </div>
+  <div class="no-print" style="text-align:center; margin:18px 0;">
+    <button onclick="window.print()" style="background:#b30000; color:#fff; border:none; border-radius:6px; padding:10px 34px; font-size:14px; font-weight:700; cursor:pointer; font-family:'Poppins',sans-serif; letter-spacing:0.3px;">
+      &#128424; Print / Save PDF
+    </button>
+  </div>
+</body>
+</html>`;
+  openPrintWindow(html, 'view');
+}
+
+// ==================== RAZORPAY PAYMENT INTEGRATION ====================
 function openRazorpayPayment(uid, studentName, rollNo, studentClass, totalDues) {
   // Modal fields fill karo
   document.getElementById('rzpStudentName').textContent = studentName || uid;
@@ -22057,7 +22946,7 @@ function initiateRazorpayPayment() {
         prefill: {
           name: studentName,
           contact: phone,
-          email: email || 'Parent@myschool.com' // === (NEEDS EDIT) ===
+          email: email || 'Mynjmschoolparent@gmail.com' // === (NEEDS EDIT) ===
         },
         theme: {
           color: "#667eea"
